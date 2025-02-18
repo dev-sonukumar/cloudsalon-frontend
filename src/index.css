@@ -7,17 +7,19 @@
 .bdr {
   border: 1px solid red;
 }
+
 .container {
-  max-width: 1024px;
+  max-width: 1200px;
   margin: 0 auto;
 }
+
 :root {
-  --main-color: #ff5f49;
+  --main-color: #ffb6c1;
   --main-color2: #f2f9ff;
   --main-color3: #f1faf5;
-  --secondary-color: #097969;
+  --secondary-color: #87ceeb;
   --secondary2-color: #06594f;
-  --text-color: #ffffff;
+  --text-color: #28282b;
   --color-black: #28282b;
   --color-white: #fdfdfd;
   --card-color: #f6eee8;

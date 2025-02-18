@@ -1,84 +1,82 @@
-import { Link } from "react-router-dom";
-
-import { bee, wpc, isi, epr, tec, bis } from "../utils/ImgUtils";
+import {
+  combo,
+  discount,
+  eyebrow,
+  facial,
+  hair,
+  makeup,
+  manicure,
+  waxing,
+} from "../utils/ImgUtils";
 
 const OurServices = () => {
   const services = [
     {
-      title: "BIS",
-      description:
-        'Ministry of Electronics & Information Technology (MeitY) has notified "Electronics and Information...',
-      path: "/bis",
-      image: bis,
+      title: "Hair Style",
+      image: hair,
+      path: "/services/hair-style",
     },
     {
-      title: "BEE",
-      description:
-        "We help our clients get BEE labeling on their products. This labeling is given by Bureau of energy...",
-      path: "/service2",
-      image: bee,
+      title: "MakeUp",
+      image: makeup,
+      path: "/services/makeup",
     },
     {
-      title: "WPC",
-      description:
-        "Equipment Type Approval (ETA) is an approval that has to be obtained from WPC before importing...",
-      path: "/service3",
-      image: wpc,
+      title: "Face-Threading",
+      image: eyebrow,
+      path: "/services/face-threading",
     },
     {
-      title: "ISI",
-      description:
-        "Bureau of Indian Standards (BIS) offers an ISI Marking scheme for all products...",
-      path: "/service4",
-      image: isi,
+      title: "Facial",
+      image: facial,
+      path: "/services/facial",
     },
     {
-      title: "TEC",
-      description:
-        "TEC refers to Telecom Engineering Centre, The Department of...",
-      path: "/service5",
-      image: tec,
+      title: "Waxing",
+      image: waxing,
+      path: "/services/waxing",
     },
     {
-      title: "EPR",
-      description:
-        "We at MCS Technology Inc, are providing end-to-end E-waste management...",
-      path: "/service6",
-      image: epr,
+      title: "Manicure-Pedicure",
+      image: manicure,
+      path: "/services/manicure-pedicure",
     },
+    {
+      title: "Combo-Pack",
+      image: combo,
+      path: "/services/manicure-pedicure",
+    },
+    // {
+    //   title: "Coming Soon",
+    //   image: discount,
+    //   path: "/services/manicure-pedicure",
+    // },
   ];
 
   return (
-    <div className="bg-[var(--main-color2)]">
-      <div className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">Our Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="bg-[var(--main-color2)] px-5 md:p-6">
+      <div className="container mx-auto">
+        <h2 className="text-4xl font-extrabold mb-6 text-center">
+          Our Services
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white hover:shadow-xl transition-all p-4 rounded-lg shadow-md"
+              className="bg-white hover:shadow-xl transition-all p-4 rounded-2xl shadow-md"
               data-aos="fade-right" // Add the AOS animation
             >
-              <div className="w-full rounded-lg flex justify-center items-center overflow-hidden">
+              <div className="w-full rounded-lg flex justify-center items-center overflow-hidden mb-2">
                 <img
                   src={service.image}
                   alt={service.title}
                   loading="lazy"
-                  className="h-60"
+                  className=""
                 />
               </div>
               <h3 className="text-black text-xl font-extrabold mb-2 text-center">
                 {service.title}
               </h3>
-              <p className="text-gray-600">
-                {service.description}
-                <Link
-                  to={service.path}
-                  className="text-blue-500 hover:underline ml-2"
-                >
-                  Read More
-                </Link>
-              </p>
             </div>
           ))}
         </div>

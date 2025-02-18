@@ -5,7 +5,6 @@ import Navbar from "./Pages/Navbar";
 import Footer from "./components/common/Footer";
 import Home from "./components/layout/Home";
 import Services from "./Pages/Services";
-import Post from "./Pages/Post";
 import Faq from "./Pages/Faq";
 import ContactUs from "./Pages/ContactUS";
 import NotFound from "./Pages/NotFound";
@@ -13,6 +12,8 @@ import AdminPanel from "./Pages/admin/AdminPanel";
 import Dashboard from "./components/admin/Dashboard";
 import AdminProfile from "./Pages/admin/AdminProfile";
 import BisFaqManager from "./components/admin/BisFaqManager";
+import UserDashboard from "./Pages/user/UserDashboard";
+import ProfilePage from "./Pages/user/ProfilePage";
 
 // Layout Component for Public Pages
 const Layout = () => (
@@ -38,7 +39,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "services", element: <Services /> },
-      { path: "services/:post", element: <Post /> },
+      { path: "userdashboard", element: <UserDashboard /> },
+      { path: "profile", element: <ProfilePage /> },
       { path: "faqs", element: <Faq /> },
       { path: "contact", element: <ContactUs /> },
       { path: "*", element: <NotFound /> }, // Catch-all route

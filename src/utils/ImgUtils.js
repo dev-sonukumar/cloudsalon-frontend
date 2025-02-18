@@ -1,10 +1,11 @@
-const bis = "/assets/service/bis.JPG";
-const bee = "/assets/service/bee.JPG";
-const wpc = "/assets/service/wpc.JPG";
-const isi = "/assets/service/isi.JPG";
-const epr = "/assets/service/epr.JPG";
-const tec = "/assets/service/tec.JPG";
-const asset1 = "/assets/bg/asset1.svg";
+const waxing = "/assets/service/wax-2.png";
+const combo = "/assets/service/combo.png";
+const discount = "/assets/service/discount-1.png";
+const eyebrow = "/assets/service/eyebrow.png";
+const facial = "/assets/service/facial.png";
+const hair = "/assets/service/hair.png";
+const makeup = "/assets/service/makeup.png";
+const manicure = "/assets/service/manicure.png";
 const asset2 = "/assets/bg/asset2.svg";
 const asset3 = "/assets/bg/asset3.svg";
 const asset9 = "/assets/bg/asset9.svg";
@@ -40,17 +41,18 @@ const animationImg = "/assets/animation/animation0.json";
 const contactImg = "/assets/bg/contact-img.png";
 
 export {
+  makeup,
   contactImg,
   animationImg,
   bg,
   logo,
-  bis,
-  bee,
-  wpc,
-  isi,
-  epr,
-  tec,
-  asset1,
+  waxing,
+  manicure,
+  hair,
+  combo,
+  discount,
+  eyebrow,
+  facial,
   asset2,
   asset3,
   asset9,

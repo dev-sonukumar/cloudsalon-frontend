@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, User, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 
-export default function DesktopMenu({ menu }) {
+export default function DesktopMenu({ menu, isAuthenticated }) {
   const [isHover, setIsHover] = useState(false);
 
   const subMenuAnimate = {
@@ -59,7 +59,7 @@ export default function DesktopMenu({ menu }) {
               >
                 {submenu.icon && <submenu.icon className="w-5 h-5" />}
                 <div>
-                  <h6 className="font-semibold text-foreground text-sm   ">
+                  <h6 className="font-semibold text-foreground text-sm">
                     {submenu.name}
                   </h6>
                 </div>
@@ -67,6 +67,31 @@ export default function DesktopMenu({ menu }) {
             ))}
           </Card>
         </motion.div>
+      )}
+
+      {/* User & Login Option */}
+      {menu.name === "Account" && (
+        <div className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg z-50">
+          <Card className="p-2 space-y-2">
+            {isAuthenticated ? (
+              <Link
+                to="/profile"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full"
+              >
+                <User className="w-5 h-5" />
+                <span>Profile</span>
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full"
+              >
+                <LogIn className="w-5 h-5" />
+                <span>Login</span>
+              </Link>
+            )}
+          </Card>
+        </div>
       )}
     </motion.li>
   );
