@@ -16,7 +16,7 @@ export default function Navbar() {
               href="tel:+917065995901"
               className="flex items-center gap-1 text-[12px] sm:text-sm"
             >
-              <Phone size={16} /> Call: +91-7065995901
+              <Phone size={16} /> Call: +91-9315040549
             </a>
           </div>
         </div>
