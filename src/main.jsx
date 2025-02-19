@@ -1,19 +1,20 @@
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css";
+import ContactUs from "./Pages/ContactUS";
+import Faq from "./Pages/Faq";
 import Navbar from "./Pages/Navbar";
+import NotFound from "./Pages/NotFound";
+import Services from "./Pages/Services";
+import AdminPanel from "./Pages/admin/AdminPanel";
+import AdminProfile from "./Pages/admin/AdminProfile";
+import CartPage from "./Pages/product/CartPage";
+import ProfilePage from "./Pages/user/ProfilePage";
+import UserDashboard from "./Pages/user/UserDashboard";
+import BisFaqManager from "./components/admin/BisFaqManager";
+import Dashboard from "./components/admin/Dashboard";
 import Footer from "./components/common/Footer";
 import Home from "./components/layout/Home";
-import Services from "./Pages/Services";
-import Faq from "./Pages/Faq";
-import ContactUs from "./Pages/ContactUS";
-import NotFound from "./Pages/NotFound";
-import AdminPanel from "./Pages/admin/AdminPanel";
-import Dashboard from "./components/admin/Dashboard";
-import AdminProfile from "./Pages/admin/AdminProfile";
-import BisFaqManager from "./components/admin/BisFaqManager";
-import UserDashboard from "./Pages/user/UserDashboard";
-import ProfilePage from "./Pages/user/ProfilePage";
 
 // Layout Component for Public Pages
 const Layout = () => (
@@ -41,7 +42,9 @@ const router = createBrowserRouter([
       { path: "services", element: <Services /> },
       { path: "userdashboard", element: <UserDashboard /> },
       { path: "profile", element: <ProfilePage /> },
+
       { path: "faqs", element: <Faq /> },
+      { path: "cart", element: <CartPage /> },
       { path: "contact", element: <ContactUs /> },
       { path: "*", element: <NotFound /> }, // Catch-all route
     ],

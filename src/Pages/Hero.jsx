@@ -1,7 +1,7 @@
-import { Phone } from "lucide-react";
-import { animationHero, bg } from "../utils/ImgUtils";
 import animationImg from "../../public/assets/animation/animation-hero.json";
+import { animationHero, bg } from "../utils/ImgUtils";
 import Lottie from "lottie-react";
+import { Phone } from "lucide-react";
 
 const Hero = () => {
   const animations = [animationHero]; // ✅ Correct
@@ -45,7 +45,7 @@ const Hero = () => {
               </p>
 
               {/* -- Call Button --*/}
-              <div className=" h-[50px] mt-10 mx-auto  flex items-center justify-center lg:justify-start ">
+              <div className=" h-[50px] mt-10 mx-auto  flex items-center justify-center lg:justify-start gap-4">
                 <a href="tel:+917065995901">
                   <button
                     aria-label="Call Now"

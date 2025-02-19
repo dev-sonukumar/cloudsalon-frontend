@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { ChevronDown, User, LogIn } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { ChevronDown, User, LogIn } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function DesktopMenu({ menu, isAuthenticated }) {
   const [isHover, setIsHover] = useState(false);
@@ -45,7 +45,7 @@ export default function DesktopMenu({ menu, isAuthenticated }) {
 
       {hasSubMenu && (
         <motion.div
-          className="absolute left-0 mt-2 w-80 bg-popover rounded-lg shadow-lg z-50"
+          className="absolute left-0 mt-2 w-80 bg-popover rounded-lg shadow-lg z-50 "
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
@@ -55,7 +55,7 @@ export default function DesktopMenu({ menu, isAuthenticated }) {
               <Link
                 key={i}
                 to={submenu.path}
-                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full border border-dashed"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full border border-dashed "
               >
                 {submenu.icon && <submenu.icon className="w-5 h-5" />}
                 <div>
@@ -71,12 +71,12 @@ export default function DesktopMenu({ menu, isAuthenticated }) {
 
       {/* User & Login Option */}
       {menu.name === "Account" && (
-        <div className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg z-50 ">
           <Card className="p-2 space-y-2">
             {isAuthenticated ? (
               <Link
                 to="/profile"
-                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition w-full "
               >
                 <User className="w-5 h-5" />
                 <span>Profile</span>
