@@ -1,8 +1,7 @@
-import Hero from "@/Pages/Hero";
 import HappyClientServicesCount from "../../Pages/HappyClientServiceCount";
-
-import ImageSlider from "../../Pages/ImageSlider";
 import OurServices from "../../Pages/OurServices";
+import CustomerReviews from "@/Pages/CustomerReviews";
+import Hero from "@/Pages/Hero";
 
 const Home = () => {
   return (
@@ -10,7 +9,7 @@ const Home = () => {
       <Hero />
       <OurServices />
       <HappyClientServicesCount />
-      <ImageSlider />
+      <CustomerReviews />
 
       {/* <PostPage /> */}
       {/* <Post /> */}

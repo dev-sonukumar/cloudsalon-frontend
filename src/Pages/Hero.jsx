@@ -30,9 +30,9 @@ const Hero = () => {
             <>
               {/* <img src={bg} className=" absolute bg-right" /> */}
 
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-black text-400 mb-4 hover:text-[var(--main-color)] transition-colors duration-300 ">
+              <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-black text-400 mb-4 hover:text-[var(--main-color)] transition-colors duration-300 ">
                 India’s Most Affordable Home Salon
-                <span className="text-[var(--main-color3)] ">
+                <span className="text-[var(--main-color)] ">
                   {" "}
                   Home Salon{"  "}
                 </span>{" "}
@@ -62,7 +62,7 @@ const Hero = () => {
               {/* <img src={asset18} className="lg:absolute " /> */}
             </>
           </div>
-          <div className="w-1/2">
+          <div>
             <Lottie animationData={animationImg} loop autoplay />
           </div>
         </div>

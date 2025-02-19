@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   combo,
   eyebrow,
@@ -9,6 +7,8 @@ import {
   manicure,
   waxing,
 } from "../utils/ImgUtils";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const services = [
   { title: "Hair Style", image: hair, path: "/services/hair-style" },
@@ -36,13 +36,13 @@ const cardVariants = {
 
 const OurServices = () => {
   return (
-    <div className="bg-[var(--main-color2)] px-5 py-12">
+    <div className="bg-[var(--main-color2)] px-5 py-10 pb-20">
       <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "circIn" }}
-          className="text-4xl font-extrabold mb-10 text-center text-[var(--main-color)]"
+          className="text-2xl md:text-3xl font-extrabold mb-10 text-center text-[var(--main-color)]"
         >
           Our Services
         </motion.h2>
@@ -71,7 +71,7 @@ const OurServices = () => {
                     className="w-full  object-cover rounded-lg transition-transform duration-300 hover:scale-105"
                   />
                 </div>
-                <h3 className="text-black text-lg font-bold text-center">
+                <h3 className="text-black text-sm sm:text-lg font-bold text-center">
                   {service.title}
                 </h3>
               </Link>
