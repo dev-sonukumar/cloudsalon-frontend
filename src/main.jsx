@@ -9,6 +9,12 @@ import Services from "./Pages/Services";
 import AdminPanel from "./Pages/admin/AdminPanel";
 import AdminProfile from "./Pages/admin/AdminProfile";
 import CartPage from "./Pages/product/CartPage";
+import FaceThreading from "./Pages/product/productService/FaceThreading";
+import Facial from "./Pages/product/productService/Facial";
+import HairStyle from "./Pages/product/productService/HairStyle";
+import Makeup from "./Pages/product/productService/Makeup";
+import ManicurePedicure from "./Pages/product/productService/ManicurePedicure";
+import Waxing from "./Pages/product/productService/Waxing";
 import ProfilePage from "./Pages/user/ProfilePage";
 import UserDashboard from "./Pages/user/UserDashboard";
 import BisFaqManager from "./components/admin/BisFaqManager";
@@ -18,9 +24,11 @@ import Home from "./components/layout/Home";
 
 // Layout Component for Public Pages
 const Layout = () => (
-  <div>
+  <div className="min-h-screen flex flex-col">
     <Navbar />
-    <Outlet />
+    <div className="flex-grow">
+      <Outlet />
+    </div>
     <Footer />
   </div>
 );
@@ -29,7 +37,7 @@ const Layout = () => (
 const AdminLayout = () => (
   <div>
     <AdminPanel />
-    {/* <Outlet /> This enables child routes inside /admin */}
+    <Outlet />
   </div>
 );
 
@@ -40,9 +48,14 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "services", element: <Services /> },
+      { path: "services/hair-style", element: <HairStyle /> },
+      { path: "services/makeup", element: <Makeup /> },
+      { path: "services/face-threading", element: <FaceThreading /> },
+      { path: "services/facial", element: <Facial /> },
+      { path: "services/waxing", element: <Waxing /> },
+      { path: "services/manicure-pedicure", element: <ManicurePedicure /> },
       { path: "userdashboard", element: <UserDashboard /> },
       { path: "profile", element: <ProfilePage /> },
-
       { path: "faqs", element: <Faq /> },
       { path: "cart", element: <CartPage /> },
       { path: "contact", element: <ContactUs /> },
@@ -50,7 +63,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin/*",
+    path: "/admin",
     element: <AdminLayout />, // Admin Panel Layout
     children: [
       { index: true, element: <Dashboard /> }, // Default admin route

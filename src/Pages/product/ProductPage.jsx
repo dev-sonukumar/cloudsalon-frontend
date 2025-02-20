@@ -1,146 +1,127 @@
-import { useState } from "react";
+import DemoCard from "./DemoCard";
+import { useState, useEffect } from "react";
 
 const ProductPage = () => {
-  const products = [
-    {
-      name: "Smart Watch",
-      category: "Electronics",
-      variants: [
-        { id: 1, name: "Basic", price: 1999, image: "/images/watch-basic.jpg" },
-        { id: 2, name: "Pro", price: 2999, image: "/images/watch-pro.jpg" },
-        { id: 3, name: "Ultra", price: 3999, image: "/images/watch-ultra.jpg" },
-      ],
-    },
-    {
-      name: "Wireless Headphones",
-      category: "Accessories",
-      variants: [
-        {
-          id: 4,
-          name: "Standard",
-          price: 1499,
-          image: "/images/headphones-standard.jpg",
-        },
-        {
-          id: 5,
-          name: "Premium",
-          price: 2499,
-          image: "/images/headphones-premium.jpg",
-        },
-      ],
-    },
-    {
-      name: "Laptop",
-      category: "Electronics",
-      variants: [
-        {
-          id: 6,
-          name: "Core i5",
-          price: 49999,
-          image: "/images/laptop-i5.jpg",
-        },
-        {
-          id: 7,
-          name: "Core i7",
-          price: 69999,
-          image: "/images/laptop-i7.jpg",
-        },
-      ],
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const [selectedProducts, setSelectedProducts] = useState(
-    products.map((product) => ({
-      product,
-      selectedVariant: product.variants[0],
-    }))
-  );
-  const [cart, setCart] = useState([]);
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        const updatedProducts = data.map((item) => ({
+          ...item,
+          sizes: ["S", "M", "L", "XL"], // Mock Sizes
+          colors: ["Red", "Blue", "Black", "White"], // Mock Colors
+        }));
 
-  const addToCart = (product, variant) => {
-    setCart([...cart, { product, variant }]);
-  };
+        setProducts(updatedProducts);
+        setFilteredProducts(updatedProducts);
 
-  const buyNow = (product, variant) => {
-    console.log(
-      "Buying now:",
-      product.name,
-      variant.name,
-      "Price:",
-      variant.price
-    );
-  };
+        // Extract unique categories
+        const uniqueCategories = [
+          ...new Set(data.map((item) => item.category)),
+        ];
+        setCategories(uniqueCategories);
+      });
+  }, []);
+
+  // Filter function
+  useEffect(() => {
+    let filtered = products;
+
+    if (selectedCategory) {
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory
+      );
+    }
+
+    if (selectedColor) {
+      filtered = filtered.filter((product) =>
+        product.colors.includes(selectedColor)
+      );
+    }
+
+    if (maxPrice) {
+      filtered = filtered.filter((product) => product.price <= maxPrice);
+    }
+
+    if (searchQuery) {
+      filtered = filtered.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(filtered);
+  }, [selectedCategory, selectedColor, maxPrice, searchQuery, products]);
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {selectedProducts.map(({ product, selectedVariant }, index) => (
-          <div key={index} className="border p-4 rounded-lg shadow-lg">
-            <img
-              src={selectedVariant.image}
-              alt={product.name}
-              className="w-full h-60 object-cover rounded-md"
-            />
-            <h2 className="text-xl font-bold mt-2">{product.name}</h2>
-            <p className="text-gray-600">Category: {product.category}</p>
-            <p className="text-lg font-semibold text-green-600">
-              ₹{selectedVariant.price}
-            </p>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold text-center mb-6">All Products</h1>
 
-            <label className="block text-gray-700 font-medium mt-2">
-              Choose Variant:
-            </label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={selectedVariant.id}
-              onChange={(e) => {
-                const updatedProducts = [...selectedProducts];
-                updatedProducts[index].selectedVariant = product.variants.find(
-                  (v) => v.id === parseInt(e.target.value)
-                );
-                setSelectedProducts(updatedProducts);
-              }}
-            >
-              {product.variants.map((variant) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.name}
-                </option>
-              ))}
-            </select>
+      {/* Filter Section */}
+      <div className="flex flex-wrap gap-4 justify-center mb-6">
+        {/* Category Filter */}
+        <select
+          className="border p-2 rounded"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">All Categories</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
 
-            <div className="mt-4 flex gap-4">
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                onClick={() => addToCart(product, selectedVariant)}
-              >
-                Add to Cart
-              </button>
-              <button
-                className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                onClick={() => buyNow(product, selectedVariant)}
-              >
-                Buy Now
-              </button>
-            </div>
-          </div>
-        ))}
+        {/* Color Filter */}
+        <select
+          className="border p-2 rounded"
+          value={selectedColor}
+          onChange={(e) => setSelectedColor(e.target.value)}
+        >
+          <option value="">All Colors</option>
+          <option value="Red">Red</option>
+          <option value="Blue">Blue</option>
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+        </select>
+
+        {/* Price Range Filter */}
+        <input
+          type="range"
+          min="10"
+          max="1000"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+          className="cursor-pointer"
+        />
+        <span className="font-bold">${maxPrice}</span>
+
+        {/* Search Filter */}
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="border p-2 rounded"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
 
-      {/* Cart Section */}
-      <div className="mt-10 border-t pt-6">
-        <h2 className="text-2xl font-bold">Shopping Cart</h2>
-        {cart.length === 0 ? (
-          <p className="text-gray-600">Your cart is empty.</p>
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-5">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <DemoCard key={product.id} product={product} />
+          ))
         ) : (
-          <ul className="mt-4">
-            {cart.map((item, index) => (
-              <li key={index} className="border p-2 rounded-md mb-2">
-                {item.product.name} ({item.variant.name}) - ₹
-                {item.variant.price}
-              </li>
-            ))}
-          </ul>
+          <p className="text-center col-span-full">No products found.</p>
         )}
       </div>
     </div>
