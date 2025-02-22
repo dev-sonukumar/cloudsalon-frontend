@@ -1,11 +1,18 @@
 import {
   combo,
+  combo1,
   eyebrow,
   facial,
+  facial1,
   hair,
+  hair1,
   makeup,
+  makeup1,
   manicure,
+  manicure1,
+  threading1,
   waxing,
+  waxing1,
 } from "../utils/ImgUtils";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -15,43 +22,43 @@ import { ChevronRight } from "lucide-react";
 const services = [
   {
     title: "Hair Style",
-    image: hair,
+    image: hair1,
     path: "/services/hair-style",
     icon: <ChevronRight />,
   },
   {
     title: "MakeUp",
-    image: makeup,
+    image: makeup1,
     path: "/services/makeup",
     icon: <ChevronRight />,
   },
   {
     title: "Face-Threading",
-    image: eyebrow,
+    image: threading1,
     path: "/services/face-threading",
     icon: <ChevronRight />,
   },
   {
     title: "Facial",
-    image: facial,
+    image: facial1,
     path: "/services/facial",
     icon: <ChevronRight />,
   },
   {
     title: "Waxing",
-    image: waxing,
+    image: waxing1,
     path: "/services/waxing",
     icon: <ChevronRight />,
   },
   {
     title: "Manicure-Pedicure",
-    image: manicure,
+    image: manicure1,
     path: "/services/manicure-pedicure",
     icon: <ChevronRight />,
   },
   {
     title: "Combo-Pack",
-    image: combo,
+    image: combo1,
     path: "/services/combo-pack",
     icon: <ChevronRight />,
   },

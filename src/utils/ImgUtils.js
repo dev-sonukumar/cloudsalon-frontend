@@ -1,3 +1,10 @@
+const hair1 = "/assets/service/hair1.png";
+const combo1 = "/assets/service/combo1.png";
+const waxing1 = "/assets/service/waxing1.png";
+const makeup1 = "/assets/service/makeup1.png";
+const facial1 = "/assets/service/facial1.png";
+const manicure1 = "/assets/service/manicure1.png";
+const threading1 = "/assets/service/threading1.png";
 const waxing = "/assets/service/wax-2.png";
 const combo = "/assets/service/combo.png";
 const discount = "/assets/service/discount-1.png";
@@ -49,6 +56,13 @@ const heroImage5 = "/assets/hero/heroImage5.png";
 const heroImage6 = "/assets/hero/heroImage6.png";
 
 export {
+  combo1,
+  threading1,
+  waxing1,
+  facial1,
+  hair1,
+  makeup1,
+  manicure1,
   heroImage1,
   heroImage2,
   heroImage3,
