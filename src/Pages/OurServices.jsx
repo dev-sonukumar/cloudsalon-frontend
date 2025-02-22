@@ -1,17 +1,10 @@
 import {
-  combo,
   combo1,
-  eyebrow,
-  facial,
   facial1,
-  hair,
   hair1,
-  makeup,
   makeup1,
-  manicure,
   manicure1,
   threading1,
-  waxing,
   waxing1,
 } from "../utils/ImgUtils";
 import { motion } from "framer-motion";
