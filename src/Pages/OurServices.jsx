@@ -53,7 +53,7 @@ const OurServices = () => {
           variants={{
             visible: { transition: { staggerChildren: 0.15 } },
           }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"
         >
           {services.map((service, index) => (
             <motion.div
