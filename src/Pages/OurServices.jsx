@@ -9,6 +9,7 @@ import {
 } from "../utils/ImgUtils";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const services = [
   { title: "Hair Style", image: hair, path: "/services/hair-style" },
@@ -34,7 +35,24 @@ const cardVariants = {
   },
 };
 
+const SkeletonLoader = () => (
+  <div className="animate-pulse bg-gray-300 rounded-2xl w-full h-40"></div>
+);
+
 const OurServices = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const imagePromises = services.map((service) => {
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.src = service.image;
+        image.onload = resolve;
+      });
+    });
+    Promise.all(imagePromises).then(() => setIsLoading(false));
+  }, []);
+
   return (
     <div className="bg-[var(--main-color2)] px-5 py-10 pb-20">
       <div className="container mx-auto">
@@ -62,19 +80,23 @@ const OurServices = () => {
               whileHover={{ scale: 1.05 }}
               className="relative bg-white bg-opacity-80 backdrop-blur-md hover:shadow-2xl transition-all p-5 rounded-2xl shadow-md cursor-pointer"
             >
-              <Link to={service.path}>
-                <div className="w-full rounded-lg flex justify-center items-center overflow-hidden mb-3">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    loading="lazy"
-                    className="w-full  object-cover rounded-lg transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                <h3 className="text-black text-sm sm:text-lg font-bold text-center">
-                  {service.title}
-                </h3>
-              </Link>
+              {isLoading ? (
+                <SkeletonLoader />
+              ) : (
+                <Link to={service.path}>
+                  <div className="w-full rounded-lg flex justify-center items-center overflow-hidden mb-3">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      loading="lazy"
+                      className="w-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="text-black text-sm sm:text-lg font-bold text-center">
+                    {service.title}
+                  </h3>
+                </Link>
+              )}
             </motion.div>
           ))}
         </motion.div>
