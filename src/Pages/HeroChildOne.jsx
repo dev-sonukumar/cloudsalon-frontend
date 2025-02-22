@@ -1,5 +1,4 @@
 import {
-  animationHero,
   heroImage1,
   heroImage2,
   heroImage3,
@@ -8,7 +7,7 @@ import {
   heroImage6,
 } from "../utils/ImgUtils";
 import { motion } from "framer-motion";
-import { Phone } from "lucide-react";
+
 import { useState, useEffect } from "react";
 
 const images = [

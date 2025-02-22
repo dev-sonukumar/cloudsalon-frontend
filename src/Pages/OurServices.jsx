@@ -10,19 +10,51 @@ import {
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
 
 const services = [
-  { title: "Hair Style", image: hair, path: "/services/hair-style" },
-  { title: "MakeUp", image: makeup, path: "/services/makeup" },
-  { title: "Face-Threading", image: eyebrow, path: "/services/face-threading" },
-  { title: "Facial", image: facial, path: "/services/facial" },
-  { title: "Waxing", image: waxing, path: "/services/waxing" },
+  {
+    title: "Hair Style",
+    image: hair,
+    path: "/services/hair-style",
+    icon: <ChevronRight />,
+  },
+  {
+    title: "MakeUp",
+    image: makeup,
+    path: "/services/makeup",
+    icon: <ChevronRight />,
+  },
+  {
+    title: "Face-Threading",
+    image: eyebrow,
+    path: "/services/face-threading",
+    icon: <ChevronRight />,
+  },
+  {
+    title: "Facial",
+    image: facial,
+    path: "/services/facial",
+    icon: <ChevronRight />,
+  },
+  {
+    title: "Waxing",
+    image: waxing,
+    path: "/services/waxing",
+    icon: <ChevronRight />,
+  },
   {
     title: "Manicure-Pedicure",
     image: manicure,
     path: "/services/manicure-pedicure",
+    icon: <ChevronRight />,
   },
-  { title: "Combo-Pack", image: combo, path: "/services/combo-pack" },
+  {
+    title: "Combo-Pack",
+    image: combo,
+    path: "/services/combo-pack",
+    icon: <ChevronRight />,
+  },
 ];
 
 const cardVariants = {
@@ -92,8 +124,9 @@ const OurServices = () => {
                       className="w-full object-cover rounded-lg transition-transform duration-300 hover:scale-105"
                     />
                   </div>
-                  <h3 className="text-black text-sm sm:text-lg font-bold text-center">
+                  <h3 className="flex gap-3 justify-center items-center text-black text-sm sm:text-lg font-bold ">
                     {service.title}
+                    {service.icon}
                   </h3>
                 </Link>
               )}

@@ -4,34 +4,17 @@ import {
   heroImage2,
   heroImage3,
   heroImage4,
-  heroImage5,
   heroImage6,
 } from "../utils/ImgUtils";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
-import { useState, useEffect } from "react";
-import Slider from "react-slick";
+
 import HeroChildOne from "./HeroChildOne";
 
-const images = [
-  heroImage1,
-  heroImage2,
-  heroImage3,
-  heroImage4,
-  heroImage5,
-  heroImage6,
-];
 
 const Hero = () => {
   const animations = [animationHero]; // ✅ Correct
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Check if any animation is missing
   if (
