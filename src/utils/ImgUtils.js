@@ -35,18 +35,32 @@ const brand14 = "/assets/brand/brand14.png";
 const brand15 = "/assets/brand/brand15.png";
 const brand16 = "/assets/brand/brand16.png";
 const brand17 = "/assets/brand/brand17.png";
-const bg = "/assets/bg/bg2.jpg";
+const bg1 = "/assets/bg/bg1.png";
+const bg2 = "/assets/bg/bg2.png";
 const logo = "/assets/logo.png";
 const animationImg = "/assets/animation/animation0.json";
 const animationHero = "/assets/animation/animation-hero.json";
 const contactImg = "/assets/bg/contact-img.png";
+const heroImage1 = "/assets/hero/heroImage1.png";
+const heroImage2 = "/assets/hero/heroImage2.png";
+const heroImage3 = "/assets/hero/heroImage3.png";
+const heroImage4 = "/assets/hero/heroImage4.png";
+const heroImage5 = "/assets/hero/heroImage5.png";
+const heroImage6 = "/assets/hero/heroImage6.png";
 
 export {
+  heroImage1,
+  heroImage2,
+  heroImage3,
+  heroImage4,
+  heroImage5,
+  heroImage6,
   animationHero,
   makeup,
   contactImg,
   animationImg,
-  bg,
+  bg1,
+  bg2,
   logo,
   waxing,
   manicure,
