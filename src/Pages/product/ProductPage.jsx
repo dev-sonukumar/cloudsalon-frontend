@@ -1,5 +1,15 @@
-import DemoCard from "./DemoCard";
 import { useState, useEffect } from "react";
+import DemoCard from "./DemoCard";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
+import { ChevronDown, Filter } from "lucide-react"; // Added Filter Icon
+import { Button } from "@/components/ui/button";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +19,7 @@ const ProductPage = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [maxPrice, setMaxPrice] = useState(1000);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterOpen, setFilterOpen] = useState(false); // State for filter visibility
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -61,61 +72,98 @@ const ProductPage = () => {
   }, [selectedCategory, selectedColor, maxPrice, searchQuery, products]);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-6">All Products</h1>
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">All Products</h1>
 
-      {/* Filter Section */}
-      <div className="flex flex-wrap gap-4 justify-center mb-6">
-        {/* Category Filter */}
-        <select
-          className="border p-2 rounded"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+      {/* Filter Toggle Button */}
+      <div className="flex justify-center mb-4">
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 border border-gray-300 shadow-md px-4 py-2 rounded-md"
+          onClick={() => setFilterOpen(!filterOpen)}
         >
-          <option value="">All Categories</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-
-        {/* Color Filter */}
-        <select
-          className="border p-2 rounded"
-          value={selectedColor}
-          onChange={(e) => setSelectedColor(e.target.value)}
-        >
-          <option value="">All Colors</option>
-          <option value="Red">Red</option>
-          <option value="Blue">Blue</option>
-          <option value="Black">Black</option>
-          <option value="White">White</option>
-        </select>
-
-        {/* Price Range Filter */}
-        <input
-          type="range"
-          min="10"
-          max="1000"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(e.target.value)}
-          className="cursor-pointer"
-        />
-        <span className="font-bold">${maxPrice}</span>
-
-        {/* Search Filter */}
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="border p-2 rounded"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+          <Filter className="w-5 h-5" /> Filter
+        </Button>
       </div>
 
+      {/* Filter Section (Hidden Until Opened) */}
+      {filterOpen && (
+        <div className="flex flex-wrap gap-4 justify-center mb-6 bg-white p-4 rounded-lg shadow-md transition-all duration-300 ">
+          {/* Category Filter */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center justify-between w-full md:w-52 px-4 py-2 border rounded-md shadow-sm bg-white text-gray-700 hover:bg-gray-100 transition ">
+              {selectedCategory || "All Categories"}
+              <ChevronDown className="w-4 h-4 ml-2 text-gray-500 " />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-52 border bg-white rounded-lg shadow-lg ">
+              <DropdownMenuItem
+                onClick={() => setSelectedCategory("")}
+                className="hover:bg-gray-100 cursor-pointer "
+              >
+                All Categories
+              </DropdownMenuItem>
+              {categories.map((category, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  onClick={() => setSelectedCategory(category)}
+                  className="hover:bg-gray-100 cursor-pointer"
+                >
+                  {category}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Color Filter */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center justify-between w-full md:w-52 px-4 py-2 border rounded-md shadow-sm bg-white text-gray-700 hover:bg-gray-100 transition ">
+              {selectedColor || "All Colors"}
+              <ChevronDown className="w-4 h-4 ml-2 text-gray-500" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-52 border bg-white rounded-lg shadow-lg ">
+              <DropdownMenuItem
+                onClick={() => setSelectedColor("")}
+                className="hover:bg-gray-100 cursor-pointer"
+              >
+                All Colors
+              </DropdownMenuItem>
+              {["Red", "Blue", "Black", "White"].map((color, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  onClick={() => setSelectedColor(color)}
+                  className="hover:bg-gray-100 cursor-pointer"
+                >
+                  {color}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Price Range Filter */}
+          <div className="flex flex-col items-center gap-2 w-full md:w-40">
+            <span className="text-sm font-medium">Max Price: ₹{maxPrice}</span>
+            <Slider
+              min={10}
+              max={10000}
+              value={[maxPrice]}
+              onValueChange={(value) => setMaxPrice(value[0])}
+              className="w-full md:w-40"
+            />
+          </div>
+
+          {/* Search Filter */}
+          <Input
+            type="text"
+            placeholder="Search products..."
+            className="w-full md:w-60 border p-2 rounded-md shadow-sm"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      )}
+
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-8">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <DemoCard key={product.id} product={product} />
