@@ -117,7 +117,7 @@ const OurServices = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ scale: 1.05 }}
-              className="relative bg-white bg-opacity-80 backdrop-blur-md hover:shadow-2xl transition-all p-5 rounded-2xl shadow-md cursor-pointer"
+              className="relative bg-white bg-opacity-80 backdrop-blur-md hover:shadow-2xl transition-all p-2 md:p-3 rounded-2xl shadow-md cursor-pointer"
             >
               {isLoading ? (
                 <SkeletonLoader />
