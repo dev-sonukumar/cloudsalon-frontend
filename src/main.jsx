@@ -21,6 +21,9 @@ import BisFaqManager from "./components/admin/BisFaqManager";
 import Dashboard from "./components/admin/Dashboard";
 import Footer from "./components/common/Footer";
 import Home from "./components/layout/Home";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { Toaster } from "react-hot-toast";
 
 // Layout Component for Public Pages
 const Layout = () => (
@@ -74,5 +77,18 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    {/* Toast container */}
+    <Toaster
+      position="top-right"
+      toastOptions={{
+        duration: 3000,
+        style: {
+          background: "#333",
+          color: "#fff",
+        },
+      }}
+    />
+    <RouterProvider router={router} />
+  </Provider>
 );

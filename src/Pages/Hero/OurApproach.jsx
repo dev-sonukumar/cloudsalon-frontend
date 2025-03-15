@@ -30,7 +30,7 @@ const approachData = [
 
 const OurApproach = () => {
   return (
-    <section className="my-20">
+    <section className="my-20 px-5">
       <section className="container flex flex-col lg:flex-row gap-10">
         {/* Left Section */}
         <div className="lg:w-1/2">

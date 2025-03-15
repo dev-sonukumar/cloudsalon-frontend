@@ -7,7 +7,7 @@ import { fadeIn } from "@/utils/varients";
 
 const HeroAbout = () => {
   return (
-    <div className="w-full overflow-hidden bg-[var(--main-color2)] py-20 pb-20">
+    <div className="w-full overflow-hidden bg-[var(--main-color2)]  pb-20 px-5 ">
       {/* <div className="pb-10">
         <TextMovingAnimation
           spanText={"Empower Your Business:"}

@@ -6,15 +6,13 @@ import HappyClientServicesCount from "@/Pages/Hero/HappyClientServiceCount";
 import HeroAbout from "@/Pages/Hero/HeroAbout";
 import OurApproach from "@/Pages/Hero/OurApproach";
 
-
 const Home = () => {
   return (
     <div className="flex flex-col">
       <Hero />
-      <HeroAbout />
- 
-      <OurApproach />
       <OurServices />
+      <HeroAbout />
+      <OurApproach />
       <HappyClientServicesCount />
       <Gallery />
       <CustomerReviews />
