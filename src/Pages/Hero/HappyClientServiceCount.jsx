@@ -1,12 +1,67 @@
+import { fadeIn } from "@/utils/varients";
+import { motion } from "framer-motion";
+import { CalendarDays, FolderOpenDot, Globe, Smile } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const HappyClientServicesCount = () => {
   // Stats configuration
   const stats = [
-    { label: "Projects Executed", key: "projects", value: 250, icon: "📊" },
-    { label: "Happy Clients", key: "clients", value: 1500, icon: "😊" },
-    { label: "Locations", key: "locations", value: 30, icon: "🌍" },
-    { label: "Years in Business", key: "years", value: 10, icon: "📅" },
+    {
+      label: "Projects Executed",
+      key: "projects",
+      value: 250,
+      icon: (
+        <FolderOpenDot
+          size={44}
+          strokeWidth={1.5}
+          style={{
+            color: "#6E260E",
+          }}
+        />
+      ),
+    },
+    {
+      label: "Happy Clients",
+      key: "clients",
+      value: 1500,
+      icon: (
+        <Smile
+          size={44}
+          strokeWidth={1.25}
+          style={{
+            color: "#DAA06D	",
+          }}
+        />
+      ),
+    },
+    {
+      label: "Locations",
+      key: "locations",
+      value: 30,
+      icon: (
+        <Globe
+          size={44}
+          strokeWidth={1.25}
+          style={{
+            color: "#7dcea0",
+          }}
+        />
+      ),
+    },
+    {
+      label: "Years in Business",
+      key: "years",
+      value: 10,
+      icon: (
+        <CalendarDays
+          size={44}
+          strokeWidth={1.25}
+          style={{
+            color: "#722F37",
+          }}
+        />
+      ),
+    },
   ];
 
   // State for keeping track of counts
@@ -69,19 +124,20 @@ const HappyClientServicesCount = () => {
   }, [inView]);
 
   return (
-    <div
+    <motion.div
+      variants={fadeIn("up", 0.2)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.7 }}
       ref={statsRef}
-      className="flex flex-col justify-center items-center p-8 lg:mt-12  lg:my-12"
+      className="  flex flex-col justify-center items-center py-10 lg:mt-12  lg:my-12 "
     >
-      <h2 className="font-bold text-2xl md:text-3xl mb-10">
+      {/* <h2 className="font-bold text-2xl md:text-3xl mb-10 ">
         Experience and Expertize
-      </h2>
-      <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full px-0 lg:px-5 ">
+      </h2> */}
+      <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full  ">
         {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center bg-white rounded-xl shadow-lg p-6"
-          >
+          <div key={index} className="flex flex-col items-center ">
             {loading ? (
               // Skeleton Loader
               <div className="space-y-4">
@@ -93,8 +149,8 @@ const HappyClientServicesCount = () => {
             ) : (
               // Actual Content
               <>
-                <div className="text-5xl font-bold">{stat.icon}</div>
-                <div className="text-4xl font-extrabold text-[var(--main-color)] mt-5">
+                <div className="text-4xl font-bold">{stat.icon}</div>
+                <div className="text-4xl font-extrabold text-[var(--main-color1)] mt-5">
                   {count[stat.key]}+
                 </div>
                 <h3 className="text-xl font-semibold text-gray-700 mt-2">
@@ -106,7 +162,7 @@ const HappyClientServicesCount = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

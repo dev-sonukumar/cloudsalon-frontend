@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import DemoCard from "./DemoCard";
+import DemoCard from "./ProductCard";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { ChevronDown, Filter } from "lucide-react"; // Added Filter Icon
 import { Button } from "@/components/ui/button";
+// import CartPage from "./CartPage";
+import DemoCart from "./DemoCart";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -162,16 +164,22 @@ const ProductPage = () => {
         </div>
       )}
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-8">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <DemoCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="text-center col-span-full">No products found.</p>
-        )}
-      </div>
+      <section className="flex">
+        <section>
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-8">
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => (
+                <DemoCard key={product.id} product={product} />
+              ))
+            ) : (
+              <p className="text-center col-span-full">No products found.</p>
+            )}
+          </div>
+        </section>
+        {/* <CartPage /> */}
+        <DemoCart />
+      </section>
     </div>
   );
 };

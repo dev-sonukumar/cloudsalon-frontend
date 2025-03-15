@@ -26,15 +26,32 @@ p {
   --main-color3: #ffb6c1;
   --secondary-color: #87ceeb;
   --secondary2-color: #06594f;
-  --text-color: #28282b;
-  --color-black: #28282b;
-  --color-white: #fdfdfd;
+  --text-color: #ffffff;
+  --color-black: #0f0f0f;
+  --heading-color: #333333;
+  --paragraph-color: #4f4f4f;
+  --gray-color: #8f8f8f;
+  --gray-color2: #919090;
+  --gray-color3: #a7a7a7;
+  --gray-color4: #a8a8a8;
+  --gray-color5: #e8eaed;
+  --color-white: #ffffff;
   --card-color: #f6eee8;
-}
 
+}
 body {
   @apply font-inter;
   background-color: var(--color-white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--heading-color);
+}
+p {
+  color: var(--paragraph-color);
 }
 
 @layer components {
@@ -155,8 +172,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-
 
 @layer base {
   * {
