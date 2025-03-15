@@ -2,175 +2,199 @@ import { useState, useEffect } from "react";
 import {
   ShoppingBag,
   Heart,
-  Users,
   Settings,
   Edit,
-  DollarSign,
+  LogOut,
+  Menu,
+  MapPin,
 } from "lucide-react";
-import axios from "axios";
+import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrders } from "@/features/order/orderSlice";
+
+// ShadCN components
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 const UserDashboard = () => {
-  const [isAdmin, setIsAdmin] = useState(false); // Change to true for admin
-  const [orders, setOrders] = useState([
-    { id: 1, status: "Pending" },
-    { id: 2, status: "Shipped" },
-    { id: 3, status: "Delivered" },
-  ]);
-  const [wishlistItems, setWishlistItems] = useState([
-    { id: 1, name: "Product 1" },
-    { id: 2, name: "Product 2" },
-    { id: 3, name: "Product 3" },
-  ]);
-  const [userDetails, setUserDetails] = useState({
-    name: "Cloud Salon",
-    email: "contact@cloudsalon.in",
-    role: "user", // Change to "admin" for admin features
-  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Fetch data on component mount (simulated with dummy data for now)
+  const {
+    orders,
+    status: orderStatus,
+    error: orderError,
+  } = useSelector((state) => state.orders);
+
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
-    // In the future, replace with actual API calls
-    if (userDetails.role === "admin") {
-      setIsAdmin(true);
+    if (orderStatus === "idle") {
+      dispatch(fetchOrders());
     }
-  }, [userDetails]);
+  }, [orderStatus, dispatch]);
 
-  // Handle Logout
   const handleLogout = () => {
-    // Clear user session (mock example, implement real logout logic)
     localStorage.removeItem("userToken");
-    window.location.href = "/login"; // Redirect to login page
+    toast.success("Logged out successfully!");
+    navigate("/login");
   };
 
-  // Handle item removal from wishlist
-  const handleRemoveFromWishlist = (itemId) => {
-    setWishlistItems((prevItems) =>
-      prevItems.filter((item) => item.id !== itemId)
-    );
+  const handleLinkClick = (path) => {
+    navigate(path);
   };
+
+  // Sidebar links for users only
+  const userLinks = [
+    { label: "Account Settings", icon: Settings, path: "/account-settings" },
+    { label: "Payment Methods", icon: Edit, path: "/payment-methods" },
+    { label: "Manage Addresses", icon: MapPin, path: "/manage-addresses" },
+    { label: "Track Orders", icon: ShoppingBag, path: "/track-orders" },
+    { label: "Wishlist", icon: Heart, path: "/wishlist" },
+  ];
 
   return (
-    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto  bg-white rounded-lg shadow-lg overflow-hidden">
-        {/* Dashboard Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-8 text-white">
-          <h1 className="text-3xl font-semibold">
-            Welcome, {userDetails.name}
-          </h1>
-          <p className="mt-2 text-sm">
-            Here’s an overview of your account activity
-          </p>
+    <div className="container flex min-h-screen bg-gray-50">
+      {/* Sidebar (Desktop) */}
+      <aside className="hidden lg:block w-64 bg-white shadow-md">
+        <div className="p-6">
+          <h2 className="text-2xl font-bold text-indigo-600 mb-8">Dashboard</h2>
+
+          <nav className="space-y-4">
+            {userLinks.map(({ label, icon: Icon, path }) => (
+              <div
+                key={label}
+                onClick={() => handleLinkClick(path)}
+                className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-indigo-600 transition"
+              >
+                <Icon className="w-5 h-5" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </nav>
+
+          <Button
+            variant="destructive"
+            className="mt-10 w-full flex gap-2"
+            onClick={handleLogout}
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
         </div>
+      </aside>
 
-        {/* Dashboard Content */}
-        <div className="px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Order History */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4">Order History</h2>
-              <div className="space-y-4">
-                {orders.map((order) => (
-                  <div
-                    key={order.id}
-                    className="flex justify-between items-center"
-                  >
-                    <p>Order #{order.id}</p>
-                    <span
-                      className={`text-sm ${
-                        order.status === "Pending"
-                          ? "text-yellow-500"
-                          : order.status === "Shipped"
-                          ? "text-blue-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {order.status}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* Sidebar (Mobile) */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute top-4 left-4 z-50 lg:hidden"
+          >
+            <Menu />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-indigo-600 mb-8">
+              Dashboard
+            </h2>
 
-            {/* Wishlist */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4">Wishlist</h2>
-              <ul className="space-y-4">
-                {wishlistItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <Heart className="text-red-500" />
-                      <span>{item.name}</span>
-                    </div>
-                    <button
-                      onClick={() => handleRemoveFromWishlist(item.id)}
-                      className="text-sm text-red-500"
-                    >
-                      Remove
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <nav className="space-y-4">
+              {userLinks.map(({ label, icon: Icon, path }) => (
+                <div
+                  key={label}
+                  onClick={() => handleLinkClick(path)}
+                  className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-indigo-600 transition"
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </nav>
 
-            {/* Admin Features */}
-            {isAdmin && (
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h2 className="text-2xl font-semibold mb-4">Admin Features</h2>
-                <ul className="space-y-4">
-                  <li className="flex items-center space-x-2">
-                    <Users className="text-indigo-500" />
-                    <span>Manage Users</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <Edit className="text-indigo-500" />
-                    <span>Manage Products</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <DollarSign className="text-green-500" />
-                    <span>View Sales & Revenue</span>
-                  </li>
-                </ul>
-              </div>
+            <Button
+              variant="destructive"
+              className="mt-10 w-full flex gap-2"
+              onClick={handleLogout}
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Main Content */}
+      <main className="flex-1 p-6 lg:p-12">
+        {/* Header */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="mb-10"
+        >
+          <h1 className="text-2xl md:text-4xl font-extrabold text-indigo-600">
+            Welcome, {user?.name || "User"}!
+          </h1>
+          <p className="text-sm mt-2 text-gray-500">
+            Here's an overview of your account activity.
+          </p>
+        </motion.div>
+
+        {/* Order History */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className=""
+        >
+          <div className="bg-white rounded-xl shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4">Order History</h2>
+
+            {orderStatus === "loading" && (
+              <p className="text-gray-500 text-sm">Loading orders...</p>
             )}
 
-            {/* Quick Links */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
-              <ul>
-                <li className="flex items-center space-x-2 py-2">
-                  <Settings className="text-indigo-500" />
-                  <span>Account Settings</span>
-                </li>
-                <li className="flex items-center space-x-2 py-2">
-                  <Edit className="text-indigo-500" />
-                  <span>Update Payment Methods</span>
-                </li>
-                <li className="flex items-center space-x-2 py-2">
-                  <ShoppingBag className="text-green-500" />
-                  <span>Track Orders</span>
-                </li>
-                <li className="flex items-center space-x-2 py-2">
-                  <Heart className="text-red-500" />
-                  <span>View Wishlist</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+            {orderStatus === "succeeded" && (
+              <>
+                {orders.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No orders found.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {orders.map((order) => (
+                      <div
+                        key={order.id}
+                        className="flex justify-between items-center border-b pb-2"
+                      >
+                        <p className="text-sm">Order #{order.id}</p>
+                        <span
+                          className={`text-sm font-medium ${
+                            order.status === "Pending"
+                              ? "text-yellow-500"
+                              : order.status === "Shipped"
+                              ? "text-blue-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {order.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
 
-          {/* Footer Section */}
-          <div className="mt-8 text-center">
-            <button
-              onClick={handleLogout}
-              className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
-            >
-              Logout
-            </button>
+            {orderStatus === "failed" && (
+              <p className="text-red-500 text-sm">
+                Failed to load orders. {orderError || "Please try again."}
+              </p>
+            )}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </main>
     </div>
   );
 };

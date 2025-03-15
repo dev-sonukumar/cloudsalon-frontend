@@ -22,8 +22,9 @@ import Dashboard from "./components/admin/Dashboard";
 import Footer from "./components/common/Footer";
 import Home from "./components/layout/Home";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import store from "./app/store";
 import { Toaster } from "react-hot-toast";
+import CheckoutPage from "./Pages/product/CheckoutPage";
 
 // Layout Component for Public Pages
 const Layout = () => (
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <ProfilePage /> },
       { path: "faqs", element: <Faq /> },
       { path: "cart", element: <CartPage /> },
+      { path: "checkout", element: <CheckoutPage /> },
       { path: "contact", element: <ContactUs /> },
       { path: "*", element: <NotFound /> }, // Catch-all route
     ],

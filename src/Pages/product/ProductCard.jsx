@@ -45,15 +45,15 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="w-full p-6 border border-gray-200 rounded-lg bg-white shadow-md transition-transform hover:scale-[1.02]">
-      <div className="flex flex-col md:flex-row gap-6 items-center">
+      <div className="flex flex-col md:flex-row gap-10 items-center">
         {/* Product Image Gallery */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-2">
           {/* Main Image */}
           <div className="flex justify-center">
             <img
               src={selectedImage}
               alt={product?.title}
-              className="h-52 object-cover rounded-lg border shadow-md transition-all"
+              className="h-52 w-60 object-cover rounded-lg border shadow-md transition-all"
             />
           </div>
 
@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 onClick={() => setSelectedImage(img)}
-                className={`w-16 h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+                className={`w-20 h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
                   selectedImage === img
                     ? "ring-2 ring-[var(--main-color)]"
                     : "hover:ring-2 hover:ring-[var(--main-color)]"
@@ -103,7 +103,7 @@ const ProductCard = ({ product }) => {
                 <button
                   key={index}
                   onClick={() => setSelectedVariant(variant)}
-                  className={`py-2 px-5 border rounded-lg transition-all ${
+                  className={`py-1 px-5 border rounded-lg transition-all ${
                     selectedVariant.name === variant.name
                       ? "border-2 border-[var(--main-color)] bg-[var(--main-color)] text-white"
                       : "hover:border-2 hover:border-[var(--main-color)]"
@@ -119,17 +119,22 @@ const ProductCard = ({ product }) => {
           <div className="mt-6 flex gap-3 justify-center md:justify-start">
             <Button
               onClick={handleAddToCart}
-              className="flex items-center gap-2 bg-[var(--main-color)] text-white font-semibold py-2 px-5 rounded-xl hover:bg-[#E65A5A] transition shadow-lg"
+              className="flex items-center gap-2 hover:bg-[var(--main-color)] text-white font-semibold py-5 rounded-xl bg-[#E65A5A] transition shadow-lg"
             >
               <FaShoppingCart className="text-lg" /> Add to Cart
             </Button>
 
-            <Link
-              to={`/checkout?product=${product?.id}&variant=${selectedVariant.name}`}
-              className="bg-[#66D9EF] text-white font-semibold py-2 px-5 rounded-xl hover:bg-[#5BBCE8] transition shadow-lg"
+            <Button
+              onClick={handleAddToCart}
+              className="flex items-center gap-2 hover:bg-[var(--main-color2)] text-white hover:text-black font-semibold py-5 rounded-xl bg-[var(--secondary-color)] transition shadow-lg"
             >
-              Buy Now
-            </Link>
+              <Link
+                to={`/checkout?product=${product?.id}&variant=${selectedVariant.name}`}
+                className="flex gap-3 items-center"
+              >
+                <FaShoppingCart className="text-lg" /> Buy Now
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

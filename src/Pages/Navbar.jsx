@@ -4,8 +4,15 @@ import DesktopMenu from "../components/common/DesktopMenu";
 import { logo } from "../utils/ImgUtils";
 import { Menus } from "../utils/MenuUtils";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const { cartItems } = useSelector((state) => state.cart);
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <header className="z-50 sticky top-0 left-0 text-[15px] w-full flex flex-col gap-2 bg-white shadow-lg">
       {/* -- Top nav bar -- */}
@@ -48,7 +55,7 @@ export default function Navbar() {
             <Link to="/cart" className="relative">
               <ShoppingCart size={24} />
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
-                3
+                {totalQuantity}
               </span>
             </Link>
             <Link to="/profile">
