@@ -3,20 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/varients";
-// import TextMovingAnimation from "../AminamtionPages/TextMovingAnimation";
 
 const HeroAbout = () => {
   return (
-    <div className="w-full overflow-hidden bg-[var(--main-color2)]  pb-20 px-5 ">
-      {/* <div className="pb-10">
-        <TextMovingAnimation
-          spanText={"Empower Your Business:"}
-          mainText={
-            "Your Trusted Consultant for Legal Business Compliance Solutions."
-          }
-        />
-      </div> */}
-
+    <div className="w-full overflow-hidden   py-20 px-5 ">
       {/* ----- About ----- */}
 
       <section className="w-full  container flex  flex-col lg:flex-row  gap-10 lg:gap-20 text-[var(--color-black)] ">

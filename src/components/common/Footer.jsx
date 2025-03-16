@@ -1,8 +1,14 @@
+import { bg2 } from "@/utils/ImgUtils";
 import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-[var(--main-color2)]  py-8 ">
+    <footer
+      className="bg-no-repeat bg-cover bg-center  py-10 "
+      style={{
+        backgroundImage: `url(${bg2})`,
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-left ">
           {/* Column 1: About Us */}

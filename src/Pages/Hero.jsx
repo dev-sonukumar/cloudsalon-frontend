@@ -1,5 +1,6 @@
 import {
   animationHero,
+  bg2,
   heroImage1,
   heroImage2,
   heroImage3,
@@ -11,10 +12,8 @@ import { Phone } from "lucide-react";
 
 import HeroChildOne from "./HeroChildOne";
 
-
 const Hero = () => {
   const animations = [animationHero]; // ✅ Correct
-
 
   // Check if any animation is missing
   if (
@@ -30,9 +29,14 @@ const Hero = () => {
   }
 
   return (
-    <section className="bg-no-repeat bg-cover">
-      <div className="w-full mt-10 flex  justify-center items-center">
-        <div className="container px-5 md:px-0 pb-12 flex flex-col-reverse md:flex-col lg:flex-row justify-center items-center gap-10">
+    <section
+      className="bg-no-repeat bg-cover bg-center lg:px-5 lg:py-10 pb-20"
+      style={{
+        backgroundImage: `url(${bg2})`,
+      }}
+    >
+      <div className="w-full h-[70vh] lg:h-[50vh]  lg:mt-10 flex  justify-center items-center">
+        <div className="container px-5 md:px-0 pb-12 flex flex-col-reverse md:flex-col lg:flex-row justify-center items-center  gap-10 ">
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-black text-400 mb-2 hover:text-[var(--main-color)] transition-colors duration-300">
               India’s Most Affordable Home Salon
@@ -137,7 +141,7 @@ const Hero = () => {
             </section>
 
             {/* --- Image Slide Section --- */}
-           <HeroChildOne/>
+            <HeroChildOne />
           </div>
         </div>
       </div>

@@ -1,3 +1,10 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import {
   heroImage1,
   heroImage2,
@@ -5,10 +12,7 @@ import {
   heroImage4,
   heroImage5,
   heroImage6,
-} from "../utils/ImgUtils";
-import { motion } from "framer-motion";
-
-import { useState, useEffect } from "react";
+} from "@/utils/ImgUtils";
 
 const images = [
   heroImage1,
@@ -20,29 +24,32 @@ const images = [
 ];
 
 const HeroChildOne = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="md:hidden rounded-xl">
-      <div className="overflow-hidden relative w-full h-[35vh] rounded-xl">
-        <motion.img
-          key={currentIndex}
-          src={images[currentIndex]}
-          alt="Slider Image"
-          className="w-full object-cover rounded-xl"
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ scale: 1.05 }}
-        />
+      <div className="relative w-screen h-[45vh] overflow-hidden">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          navigation={true}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          loop={true}
+          className="h-full"
+          breakpoints={{
+            640: { slidesPerView: 1 },
+          }}
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="object-cover "
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

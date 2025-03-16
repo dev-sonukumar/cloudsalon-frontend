@@ -37,7 +37,6 @@ p {
   --gray-color5: #e8eaed;
   --color-white: #ffffff;
   --card-color: #f6eee8;
-
 }
 body {
   @apply font-inter;
