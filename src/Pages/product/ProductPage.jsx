@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { products } from "@/data/products";
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
@@ -11,14 +10,42 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const productsapi = "https://cloudsalon-backend.onrender.com/api/products";
+
 const ProductPage = () => {
-  const [search, setSearch] = useState("");
+  // State setup
+  const [products, setProducts] = useState([]); // Corrected initialization
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(""); // Fixed naming
   const [sortOrder, setSortOrder] = useState(""); // 'lowToHigh' or 'highToLow'
 
-  // Filter products by search
+  // Fetch products from the API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(productsapi);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Filter products by search query
   const filteredProducts = products.filter((product) => {
     const productName = product?.name || "";
-    return productName.toLowerCase().includes(search.toLowerCase());
+    return productName.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   // Sort products by price
@@ -48,8 +75,8 @@ const ProductPage = () => {
           <Input
             type="text"
             placeholder="Search for products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchQuery} // Fixed controlled component value
+            onChange={(e) => setSearchQuery(e.target.value)} // Fixed handler
           />
         </div>
 
@@ -70,24 +97,31 @@ const ProductPage = () => {
         </div>
       </div>
 
+      {/* Loading and Error States */}
+      {loading && (
+        <p className="text-center text-gray-500">Loading products...</p>
+      )}
+      {error && <p className="text-center text-red-500">Error: {error}</p>}
+
       {/* Product Grid */}
-      <div className="p-4 grid grid-cols-1  gap-8">
-        {sortedProducts.length > 0 ? (
-          sortedProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <ProductCard product={product} />
-            </motion.div>
-          ))
-        ) : (
-          <p className="text-center col-span-full text-gray-500">
-            No products found.
-          </p>
-        )}
+      <div className="p-4 grid grid-cols-1 gap-8">
+        {sortedProducts.length > 0 && !loading
+          ? sortedProducts.map((product, index) => (
+              <motion.div
+                key={product._id || product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))
+          : !loading &&
+            !error && (
+              <p className="text-center col-span-full text-gray-500">
+                No products found.
+              </p>
+            )}
       </div>
     </section>
   );

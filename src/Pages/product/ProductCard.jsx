@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/features/cart/cartSlice";
@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // ✅ Variant and Image State with Fallbacks
   const [selectedVariant, setSelectedVariant] = useState(
@@ -17,17 +18,17 @@ const ProductCard = ({ product }) => {
     product?.images?.[0] || "https://via.placeholder.com/150"
   );
 
-  // ✅ Price Calculation (do this BEFORE the handler)
+  // ✅ Price Calculation
   const originalPrice = selectedVariant.price;
   const discountAmount = (originalPrice * selectedVariant.discount) / 100;
   const discountedPrice = originalPrice - discountAmount;
 
-  // ✅ Add to Cart Handler
+  // ✅ Handlers
   const handleAddToCart = () => {
     dispatch(
       addToCart({
         id: product.id,
-        title: product.title,
+        title: product.name,
         price: discountedPrice,
         selectedVariant,
         selectedImage,
@@ -35,7 +36,7 @@ const ProductCard = ({ product }) => {
     );
 
     toast.success(
-      `${product.title} (${selectedVariant.name}) added to cart! 🛒`,
+      `${product.name} (${selectedVariant.name}) added to cart! 🛒`,
       {
         duration: 3000,
         position: "top-right",
@@ -43,29 +44,41 @@ const ProductCard = ({ product }) => {
     );
   };
 
+  const handleCategoryClick = (categoryName) => {
+    console.log("Category clicked:", categoryName);
+    // Optional: Navigate or filter logic
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart(); // Add to cart first (optional)
+    navigate(
+      `/checkout?product=${product?.id}&variant=${selectedVariant.name}`
+    );
+  };
+
   return (
-    <div className="w-full p-3 lg:p-6 border bg-gray-50 border-gray-200 rounded-lg  shadow-md lg:transition-transform lg:hover:scale-[1.02]">
+    <div className="w-full p-3 lg:p-6 border bg-gray-50 border-gray-200 rounded-lg shadow-md lg:transition-transform lg:hover:scale-[1.02]">
       <div className="flex flex-col md:flex-row gap-10 items-center">
         {/* Product Image Gallery */}
         <div className="flex flex-row gap-2 w-full lg:w-[40%]">
           {/* Main Image */}
-          <div className="flex justify-center w-[80%] ">
+          <div className="flex justify-center w-[80%]">
             <img
               src={selectedImage}
               alt={product?.title}
-              className="w-full h-60 lg:h-52 object-cover rounded-lg border shadow-md transition-all "
+              className="w-full h-60 lg:h-52 object-cover rounded-lg border shadow-md transition-all"
             />
           </div>
 
           {/* Thumbnails */}
-          <div className="flex flex-col  justify-between w-[20%] ">
+          <div className="flex flex-col justify-between w-[20%]">
             {product?.images?.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 onClick={() => setSelectedImage(img)}
-                className={`w-20 lg:w-20 lg:h-16 rounded-lg cursor-pointer transition-all hover:scale-105  ${
+                className={`w-20 lg:w-20 lg:h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
                   selectedImage === img
                     ? "ring-2 ring-[var(--main-color)]"
                     : "hover:ring-2 hover:ring-[var(--main-color)]"
@@ -77,17 +90,33 @@ const ProductCard = ({ product }) => {
 
         {/* Product Details */}
         <div className="text-center md:text-left w-full">
-          <h2 className="text-xl font-bold text-gray-800">{product?.title}</h2>
+          {/* Product Categories */}
+          {/* <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
+            {product.categories.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => handleCategoryClick(cat.name)}
+                className="px-3 py-1 border border-gray-300 rounded-full hover:bg-blue-500 hover:text-white transition-all"
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div> */}
+
+          {/* Product Name */}
+          <h2 className="text-xl font-bold text-gray-800">{product?.name}</h2>
+
+          {/* Product Description */}
           <p className="text-gray-600 text-sm mt-1">{product?.description}</p>
 
-          {/* Price & Discount */}
-          <div className="mt-3">
+          {/* Pricing */}
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="text-xl font-extrabold text-[var(--main-color)]">
               ₹{discountedPrice.toFixed(2)}
-            </span>{" "}
+            </span>
             <span className="text-gray-500 line-through text-sm">
               ₹{originalPrice.toFixed(2)}
-            </span>{" "}
+            </span>
             {selectedVariant.discount > 0 && (
               <span className="text-green-600 text-sm">
                 ({selectedVariant.discount}% OFF)
@@ -117,6 +146,7 @@ const ProductCard = ({ product }) => {
 
           {/* Action Buttons */}
           <div className="mt-6 flex gap-3 justify-center md:justify-start">
+            {/* Add to Cart Button */}
             <Button
               onClick={handleAddToCart}
               className="flex items-center gap-2 hover:bg-[var(--main-color)] text-white font-semibold py-5 rounded-xl bg-[#E65A5A] transition shadow-lg"
@@ -124,16 +154,12 @@ const ProductCard = ({ product }) => {
               <FaShoppingCart className="text-lg" /> Add to Cart
             </Button>
 
+            {/* Buy Now Button */}
             <Button
-              onClick={handleAddToCart}
+              onClick={handleBuyNow}
               className="flex items-center gap-2 hover:bg-[var(--main-color2)] text-white hover:text-black font-semibold py-5 rounded-xl bg-[var(--secondary-color)] transition shadow-lg"
             >
-              <Link
-                to={`/checkout?product=${product?.id}&variant=${selectedVariant.name}`}
-                className="flex gap-3 items-center"
-              >
-                <FaShoppingCart className="text-lg" /> Buy Now
-              </Link>
+              <FaShoppingCart className="text-lg" /> Buy Now
             </Button>
           </div>
         </div>
