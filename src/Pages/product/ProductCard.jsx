@@ -44,28 +44,28 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-full p-6 border border-gray-200 rounded-lg bg-white shadow-md transition-transform hover:scale-[1.02]">
+    <div className="w-full p-3 lg:p-6 border bg-gray-50 border-gray-200 rounded-lg  shadow-md lg:transition-transform lg:hover:scale-[1.02]">
       <div className="flex flex-col md:flex-row gap-10 items-center">
         {/* Product Image Gallery */}
-        <div className="flex flex-col md:flex-row gap-2">
+        <div className="flex flex-row gap-2 w-full lg:w-[40%]">
           {/* Main Image */}
-          <div className="flex justify-center">
+          <div className="flex justify-center w-[80%] ">
             <img
               src={selectedImage}
               alt={product?.title}
-              className="h-52 w-60 object-cover rounded-lg border shadow-md transition-all"
+              className="w-full h-60 lg:h-52 object-cover rounded-lg border shadow-md transition-all "
             />
           </div>
 
           {/* Thumbnails */}
-          <div className="flex md:flex-col gap-2 justify-center">
+          <div className="flex flex-col  justify-between w-[20%] ">
             {product?.images?.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 onClick={() => setSelectedImage(img)}
-                className={`w-20 h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+                className={`w-20 lg:w-20 lg:h-16 rounded-lg cursor-pointer transition-all hover:scale-105  ${
                   selectedImage === img
                     ? "ring-2 ring-[var(--main-color)]"
                     : "hover:ring-2 hover:ring-[var(--main-color)]"
@@ -97,7 +97,7 @@ const ProductCard = ({ product }) => {
 
           {/* Variant Selection */}
           {product?.variants?.length > 1 && (
-            <div className="mt-4 flex gap-3 items-center justify-center md:justify-start">
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-center md:justify-start">
               <h2 className="font-bold mr-3">Options:</h2>
               {product?.variants?.map((variant, index) => (
                 <button
