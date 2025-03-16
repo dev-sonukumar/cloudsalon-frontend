@@ -44,11 +44,6 @@ const ProductCard = ({ product }) => {
     );
   };
 
-  const handleCategoryClick = (categoryName) => {
-    console.log("Category clicked:", categoryName);
-    // Optional: Navigate or filter logic
-  };
-
   const handleBuyNow = () => {
     handleAddToCart(); // Add to cart first (optional)
     navigate(
@@ -90,19 +85,18 @@ const ProductCard = ({ product }) => {
 
         {/* Product Details */}
         <div className="text-center md:text-left w-full">
-          {/* Product Categories */}
-          {/* <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
-            {product.categories.map((cat) => (
+          {/* Product Categories
+          <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
+            {categories.map((cat) => (
               <button
                 key={cat.name}
-                onClick={() => handleCategoryClick(cat.name)}
                 className="px-3 py-1 border border-gray-300 rounded-full hover:bg-blue-500 hover:text-white transition-all"
               >
                 {cat.name}
+                {console.log(cat.name)}
               </button>
             ))}
           </div> */}
-
           {/* Product Name */}
           <h2 className="text-xl font-bold text-gray-800">{product?.name}</h2>
 
@@ -124,6 +118,15 @@ const ProductCard = ({ product }) => {
             )}
           </div>
 
+          {/* Variant categories*/}
+          {product?.categories?.length > 1 && (
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-center md:justify-start">
+              <h2 className="font-bold mr-3">categories:</h2>
+              {product?.categories?.map((cat, index) => (
+                <button key={index}>{cat.name}</button>
+              ))}
+            </div>
+          )}
           {/* Variant Selection */}
           {product?.variants?.length > 1 && (
             <div className="mt-4 flex flex-wrap gap-3 items-center justify-center md:justify-start">
