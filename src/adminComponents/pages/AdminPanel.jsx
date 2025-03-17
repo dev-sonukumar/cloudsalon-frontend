@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import Sidebar from "@/components/ui/sidebar";
-import ServicesManager from "@/components/admin/ServicesManager";
-import PostsManager from "@/components/admin/PostsManager";
-import BisFaqManager from "@/components/admin/BisFaqManager";
-import Dashboard from "@/components/admin/Dashboard";
+import ServicesManager from "@/adminComponents/components/ServicesManager";
+import PostsManager from "@/adminComponents/components/PostsManager";
+import BisFaqManager from "@/adminComponents/components/BisFaqManager";
+import Dashboard from "@/adminComponents/components/Dashboard";
 import { Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { logo } from "@/utils/ImgUtils";
@@ -34,7 +34,7 @@ const AdminPanel = () => {
     <div className="flex h-screen">
       {/* Mobile Sidebar */}
       <Sheet>
-        <SheetTrigger className="lg:hidden fixed top-4 left-4 font-bold">
+        <SheetTrigger className="lg:hidden fixed top-4 left-4 font-bold ">
           <Menu />
         </SheetTrigger>
         <SheetContent side="left" className="w-64 p-4 flex flex-col h-full">
@@ -54,12 +54,8 @@ const AdminPanel = () => {
       {/* Desktop Sidebar */}
       <aside className="md:inline w-[18%] hidden lg:flex flex-col p-4 h-full">
         <nav className="flex-1">
-          <div className="flex items-center gap-x-3 relative">
-            <img
-              src={logo}
-              alt="MCS Technology Logo"
-              className="p-1 w-[9rem] h-12 shadow rounded-xl transition-all duration-200"
-            />
+          <div className="flex items-center gap-x-3 relative ">
+            <img src={logo} alt="CloudSalon" className="mx-auto h-40 " />
           </div>
           <Sidebar setActiveSection={setActiveSection} />
         </nav>

@@ -9,8 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const productsapi = "https://cloudsalon-backend.onrender.com/api/products";
+import { api_product } from "@/utils/api";
 
 const ProductPage = () => {
   // State setup
@@ -26,7 +25,7 @@ const ProductPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(productsapi);
+        const response = await fetch(api_product);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
