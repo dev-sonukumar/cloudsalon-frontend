@@ -7,23 +7,26 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { toast } from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
+  console.log(product);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // ✅ Variant and Image State with Fallbacks
+  const images = product?.images || [];
+  const variants = product?.variants || [];
+  const category = product?.category || [];
+
   const [selectedVariant, setSelectedVariant] = useState(
-    product?.variants?.[0] || { price: 0, discount: 0, name: "Default" }
-  );
-  const [selectedImage, setSelectedImage] = useState(
-    product?.images?.[0] || "https://via.placeholder.com/150"
+    variants[0] || { price: 0, discount: 0, name: "Default" }
   );
 
-  // ✅ Price Calculation
+  const [selectedImage, setSelectedImage] = useState(
+    images[0]?.url || "/placeholder.jpg"
+  );
+
   const originalPrice = selectedVariant.price;
   const discountAmount = (originalPrice * selectedVariant.discount) / 100;
   const discountedPrice = originalPrice - discountAmount;
 
-  // ✅ Handlers
   const handleAddToCart = () => {
     dispatch(
       addToCart({
@@ -45,7 +48,7 @@ const ProductCard = ({ product }) => {
   };
 
   const handleBuyNow = () => {
-    handleAddToCart(); // Add to cart first (optional)
+    handleAddToCart();
     navigate(
       `/checkout?product=${product?.id}&variant=${selectedVariant.name}`
     );
@@ -60,48 +63,60 @@ const ProductCard = ({ product }) => {
           <div className="flex justify-center w-[80%]">
             <img
               src={selectedImage}
-              alt={product?.title}
+              alt={product?.name || "Product Image"}
               className="w-full h-60 lg:h-52 object-cover rounded-lg border shadow-md transition-all"
             />
           </div>
 
           {/* Thumbnails */}
           <div className="flex flex-col justify-between w-[20%]">
-            {product?.images?.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                onClick={() => setSelectedImage(img)}
-                className={`w-20 lg:w-20 lg:h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
-                  selectedImage === img
-                    ? "ring-2 ring-[var(--main-color)]"
-                    : "hover:ring-2 hover:ring-[var(--main-color)]"
-                }`}
-              />
-            ))}
+            {images.length > 0 ? (
+              images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img.url}
+                  alt={img.altText || `Thumbnail ${index + 1}`}
+                  onClick={() => setSelectedImage(img.url)}
+                  className={`w-20 lg:w-20 lg:h-16 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+                    selectedImage === img.url
+                      ? "ring-2 ring-[var(--main-color)]"
+                      : "hover:ring-2 hover:ring-[var(--main-color)]"
+                  }`}
+                />
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </div>
 
         {/* Product Details */}
         <div className="text-center md:text-left w-full">
-          {/* Product Categories
+          {/* Product Categories */}
           <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.name}
-                className="px-3 py-1 border border-gray-300 rounded-full hover:bg-blue-500 hover:text-white transition-all"
-              >
-                {cat.name}
-                {console.log(cat.name)}
-              </button>
-            ))}
-          </div> */}
+            {category.length > 0 ? (
+              category.map((cat, index) => (
+                <button
+                  key={index}
+                  className="px-3 py-1 border border-gray-300 rounded-full hover:bg-blue-500 hover:text-white transition-all"
+                >
+                  {cat.name}
+                </button>
+              ))
+            ) : (
+              <p>Category</p>
+            )}
+          </div>
+
           {/* Product Name */}
-          <h2 className="text-xl font-bold text-gray-800">{product?.name}</h2>
+          <h2 className="text-xl font-bold text-gray-800">
+            {product?.name || "Product Name"}
+          </h2>
 
           {/* Product Description */}
-          <p className="text-gray-600 text-sm mt-1">{product?.description}</p>
+          <p className="text-gray-600 text-sm mt-1">
+            {product?.description || "Product Description"}
+          </p>
 
           {/* Pricing */}
           <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -118,20 +133,21 @@ const ProductCard = ({ product }) => {
             )}
           </div>
 
-          {/* Variant categories*/}
-          {product?.categories?.length > 1 && (
+          {/* Variant categories */}
+          {category.length > 1 && (
             <div className="mt-4 flex flex-wrap gap-3 items-center justify-center md:justify-start">
-              <h2 className="font-bold mr-3">categories:</h2>
-              {product?.categories?.map((cat, index) => (
+              <h2 className="font-bold mr-3">Categories:</h2>
+              {category.map((cat, index) => (
                 <button key={index}>{cat.name}</button>
               ))}
             </div>
           )}
+
           {/* Variant Selection */}
-          {product?.variants?.length > 1 && (
+          {variants.length > 1 && (
             <div className="mt-4 flex flex-wrap gap-3 items-center justify-center md:justify-start">
               <h2 className="font-bold mr-3">Options:</h2>
-              {product?.variants?.map((variant, index) => (
+              {variants.map((variant, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedVariant(variant)}
