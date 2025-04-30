@@ -27,7 +27,7 @@ import ProductCategory from "./pages/ProductCategory";
 import AllProducts from "./pages/AllProducts";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
-export const currency = "$";
+export const currency = "₹";
 
 const App = () => {
   const [adminToken, setAdminToken] = useState(

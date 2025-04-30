@@ -21,6 +21,8 @@ import order_icon from "./order_icon.png";
 import upload_area from "./upload_area.png";
 import parcel_icon from "./parcel_icon.svg";
 import main_banner_bg from "./main_banner_bg.png";
+import black_arrow_icon from "./black_arrow_icon.svg";
+import white_arrow_icon from "./white_arrow_icon.svg";
 
 import hairstyle from "././assets/service/hair1.webp";
 import makeup from "././assets/service/makeup1.webp";
@@ -30,7 +32,21 @@ import waxing from "././assets/service/waxing1.webp";
 import manicure from "././assets/service/manicure1.webp";
 import combo from "././assets/service/combo1.webp";
 
+import main_banner_bg_sm from "./main_banner_bg_sm.png";
+import bottom_banner_image from "./bottom_banner_image.png";
+import bottom_banner_image_sm from "./bottom_banner_image_sm.png";
+import bottom_banner_video_sm from "./bottom_banner_video_sm.mp4";
+import bottom_banner_video_sm1 from "./bottom_banner_video_sm.mp4";
+
 export const assets = {
+  white_arrow_icon,
+  black_arrow_icon,
+  main_banner_bg,
+  main_banner_bg_sm,
+  bottom_banner_image,
+  bottom_banner_image_sm,
+  bottom_banner_video_sm,
+  bottom_banner_video_sm1,
   logo,
   add_icon,
   order_icon,
@@ -76,6 +92,29 @@ export const products = [
     sizes: ["S", "M", "L", "XL"],
     date: 1716640945448,
     bestseller: false,
+  },
+];
+
+export const features = [
+  {
+    icon: logo,
+    title: "Fastest Delivery",
+    description: "Groceries delivered in under 30 minutes.",
+  },
+  {
+    icon: logo,
+    title: "Freshness Guaranteed",
+    description: "Fresh produce straight from the source.",
+  },
+  {
+    icon: logo,
+    title: "Affordable Prices",
+    description: "Quality groceries at unbeatable prices.",
+  },
+  {
+    icon: logo,
+    title: "Trusted by Thousands",
+    description: "Loved by 10,000+ happy customers.",
   },
 ];
 

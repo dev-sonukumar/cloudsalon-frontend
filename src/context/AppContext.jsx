@@ -11,7 +11,8 @@ axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const currency = import.meta.env.VITE_CURRENCY;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const currency = "₹";
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null); // 👈 added token state
@@ -64,17 +65,29 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  // Add Product to Cart
-  const addToCart = (itemId) => {
-    let cartData = structuredClone(cartItems);
-
-    if (cartData[itemId]) {
-      cartData[itemId] += 1;
-    } else {
-      cartData[itemId] = 1;
+  // Add to cart
+  const addToCart = async (itemId, size) => {
+    if (!size) {
+      return toast.error("Select Product Size");
     }
+
+    const cartData = { ...cartItems };
+    cartData[itemId] = cartData[itemId] || {};
+    cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
     setCartItems(cartData);
-    toast.success("Added to Cart");
+
+    if (token) {
+      try {
+        await axios.post(
+          `${backendUrl}/api/cart/add`,
+          { itemId, size },
+          { headers: { token } }
+        );
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to add to cart");
+      }
+    }
   };
 
   // Update Cart Item Quantity

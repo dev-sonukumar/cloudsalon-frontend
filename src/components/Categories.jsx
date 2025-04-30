@@ -1,9 +1,8 @@
-// import { ShopContext } from "../context/ShopContext";
 import { categories } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 const Categories = () => {
-  const { navigate } = useAppContext;
+  const { navigate } = useAppContext();
 
   return (
     <div className="mt-16">
@@ -15,7 +14,7 @@ const Categories = () => {
             className="group cursor-pointer py-5 px-3 gap-2 rounded-lg flex flex-col justify-center items-center"
             style={{ backgroundColor: category.bgColor }}
             onClick={() => {
-              navigate(`/products/${category.path.toLowerCase()}`);
+              navigate(`/collection/${category.path.toLowerCase()}`);
               scrollTo(0, 0);
             }}
           >

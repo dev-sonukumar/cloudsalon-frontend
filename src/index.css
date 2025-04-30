@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,16 @@ a.active hr {
 }
 
 * {
-  font-family: Outfit;
+  font-family: "Outfit", sans-serif;
+}
+:root {
+  --color-primary: #ec7fa9;
+  --color-primary-dull: #ffdbdb;
+}
+
+@theme {
+  --color-primary: #ec7fa9;
+  --color-primary-dull: #ffdbdb;
 }
 
 .prata-regular {
@@ -27,6 +36,10 @@ a.active hr {
     background-color: black;
     color: white;
   }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 .bdr {
   border: 1px solid red;

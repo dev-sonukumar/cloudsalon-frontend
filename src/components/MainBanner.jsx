@@ -1,7 +1,7 @@
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 
-const Hero = () => {
+const MainBanner = () => {
   return (
     <div className="relative">
       <img
@@ -25,21 +25,21 @@ const Hero = () => {
           experienced beauticians, and more.
         </p>
 
-        <div className="flex items-center mt-6 font-medium">
+        <div className="flex items-center mt-6 font-medium rounded-lg">
           <Link
-            to={"/products"}
-            className="group flex items-center gap-2 px-7 md:px-9 py-3 bg-primary hover:bg-primary-dull transition rounded text-white cursor-pointer"
+            to={"/collection"}
+            className="group flex items-center gap-2 px-7 md:px-9 py-3 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dull)] hover:text-black  transition rounded text-white cursor-pointer "
           >
             Our Services
             <img
-              className="md:hidden transition group-focus:translate-x-1"
+              className="md:hidden transition group-focus:translate-x-1 bg-(--color-primary)"
               src={assets.white_arrow_icon}
               alt="arrow"
             />
           </Link>
 
           <Link
-            to={"/products"}
+            to={"/collection"}
             className="group hidden md:flex items-center gap-2 px-9 py-3 cursor-pointer"
           >
             Explore deals
@@ -55,4 +55,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default MainBanner;

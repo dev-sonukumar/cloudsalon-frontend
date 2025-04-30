@@ -23,17 +23,30 @@ const ShopContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // Fetch products
+  // const getProductsData = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${backendUrl}/api/product/list`);
+  //     if (data.success) {
+  //       setProducts(data.products.reverse());
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Failed to fetch products");
+  //   }
+  // };
+
   const getProductsData = async () => {
     try {
-      const { data } = await axios.get(`${backendUrl}/api/product/list`);
+      const { data } = await axios.get("/api/product/list");
       if (data.success) {
-        setProducts(data.products.reverse());
+        setProducts(data.products);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch products");
+      toast.error(error.message);
     }
   };
 
