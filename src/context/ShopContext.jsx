@@ -3,13 +3,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// Create Context
 export const ShopContext = createContext();
-
-// Custom Hook
-export const useShopContext = () => {
-  return useContext(ShopContext);
-};
+export const useShopContext = () => useContext(ShopContext);
 
 const ShopContextProvider = ({ children }) => {
   const currency = "₹";
@@ -22,21 +17,7 @@ const ShopContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const navigate = useNavigate();
 
-  // Fetch products
-  // const getProductsData = async () => {
-  //   try {
-  //     const { data } = await axios.get(`${backendUrl}/api/product/list`);
-  //     if (data.success) {
-  //       setProducts(data.products.reverse());
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("Failed to fetch products");
-  //   }
-  // };
-
+  // Fetch product list
   const getProductsData = async () => {
     try {
       const { data } = await axios.get("/api/product/list");
@@ -46,11 +27,11 @@ const ShopContextProvider = ({ children }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Failed to fetch products");
     }
   };
 
-  // Fetch user cart
+  // Get user cart and merge with guest cart if exists
   const getUserCart = async (token) => {
     try {
       const { data } = await axios.post(
@@ -58,8 +39,26 @@ const ShopContextProvider = ({ children }) => {
         {},
         { headers: { token } }
       );
+
       if (data.success) {
-        setCartItems(data.cartData);
+        const serverCart = data.cartData || {};
+        const guestCart = JSON.parse(localStorage.getItem("guestCart")) || {};
+
+        const mergedCart = { ...serverCart };
+        for (const id in guestCart) {
+          mergedCart[id] = (mergedCart[id] || 0) + guestCart[id];
+        }
+
+        if (Object.keys(guestCart).length > 0) {
+          await axios.post(
+            `${backendUrl}/api/cart/merge`,
+            { mergedCart },
+            { headers: { token } }
+          );
+          localStorage.removeItem("guestCart");
+        }
+
+        setCartItems(mergedCart);
       }
     } catch (error) {
       console.error(error);
@@ -67,84 +66,84 @@ const ShopContextProvider = ({ children }) => {
     }
   };
 
-  // Add to cart
-  const addToCart = async (itemId, size) => {
-    if (!size) {
-      return toast.error("Select Product Size");
-    }
-
-    const cartData = { ...cartItems };
-    cartData[itemId] = cartData[itemId] || {};
-    cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
-    setCartItems(cartData);
+  // Add item to cart
+  const addToCart = async (itemId) => {
+    const updatedCart = { ...cartItems };
+    updatedCart[itemId] = (updatedCart[itemId] || 0) + 1;
+    setCartItems(updatedCart);
 
     if (token) {
       try {
         await axios.post(
           `${backendUrl}/api/cart/add`,
-          { itemId, size },
+          { itemId },
           { headers: { token } }
         );
+        toast.success("Added to cart");
       } catch (error) {
-        console.error(error);
         toast.error("Failed to add to cart");
       }
+    } else {
+      toast.success("Added to cart (local)");
     }
   };
 
-  // Update quantity
-  const updateQuantity = async (itemId, size, quantity) => {
-    const cartData = { ...cartItems };
-    cartData[itemId][size] = quantity;
-    setCartItems(cartData);
+  // Update item quantity
+  const updateQuantity = async (itemId, quantity) => {
+    const updatedCart = { ...cartItems };
+    updatedCart[itemId] = quantity;
+    setCartItems(updatedCart);
 
     if (token) {
       try {
         await axios.post(
           `${backendUrl}/api/cart/update`,
-          { itemId, size, quantity },
+          { itemId, quantity },
           { headers: { token } }
         );
       } catch (error) {
-        console.error(error);
         toast.error("Failed to update cart");
       }
     }
   };
 
-  // Cart total items
-  const getCartCount = () => {
-    let totalCount = 0;
-    Object.values(cartItems).forEach((item) => {
-      Object.values(item).forEach((qty) => {
-        totalCount += qty;
-      });
+  // Get total cart items
+  const getCartCount = () =>
+    Object.values(cartItems).reduce((total, qty) => total + qty, 0);
+
+  // Get total cart amount
+  const getCartAmount = () => {
+    let total = 0;
+    Object.entries(cartItems).forEach(([itemId, qty]) => {
+      const product = products.find((p) => p._id === itemId);
+      if (product) total += product.price * qty;
     });
-    return totalCount;
+    return total;
   };
 
-  // Cart total amount
-  const getCartAmount = () => {
-    let totalAmount = 0;
-    Object.entries(cartItems).forEach(([itemId, sizes]) => {
-      const product = products.find((p) => p._id === itemId);
-      if (product) {
-        Object.values(sizes).forEach((qty) => {
-          totalAmount += product.price * qty;
-        });
+  // Load guest cart on first mount
+  useEffect(() => {
+    if (!token) {
+      const guestCart = localStorage.getItem("guestCart");
+      if (guestCart) {
+        setCartItems(JSON.parse(guestCart));
       }
-    });
-    return totalAmount;
-  };
+    }
+  }, []);
+
+  // Sync guest cart to localStorage
+  useEffect(() => {
+    if (!token) {
+      localStorage.setItem("guestCart", JSON.stringify(cartItems));
+    }
+  }, [cartItems, token]);
 
   useEffect(() => {
     getProductsData();
   }, []);
 
   useEffect(() => {
-    if (token) {
-      getUserCart(token);
-    }
+    if (token) getUserCart(token);
   }, [token]);
 
   const value = {

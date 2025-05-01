@@ -49,6 +49,9 @@ const Product = () => {
 
         {/* -------- Product Info ---------- */}
         <div className="flex-1">
+          <p className="mt-5 text-gray-500 md:w-4/5 border inline px-2 py-0.5 rounded-md">
+            {productData.category}
+          </p>
           <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
           <div className=" flex items-center gap-1 mt-2">
             <img src={assets.star_icon} alt="" className="w-3 5" />
@@ -65,7 +68,8 @@ const Product = () => {
           <p className="mt-5 text-gray-500 md:w-4/5">
             {productData.description}
           </p>
-          <div className="flex flex-col gap-4 my-8">
+
+          {/* <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
               {productData.sizes.map((item, index) => (
@@ -80,7 +84,7 @@ const Product = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
           <button
             onClick={() => addToCart(productData._id, size)}
             className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700"
