@@ -12,8 +12,8 @@ const slides = [
   {
     id: 2,
     image: assets.main_banner_bg2,
-    heading: "Be Your Best Version",
-    subheading: "With Cloud Salon",
+    heading:
+      "Redefine Your Beauty Routine with Professional Care, Anytime, Anywhere — Only with Cloud Salon.",
   },
   {
     id: 3,

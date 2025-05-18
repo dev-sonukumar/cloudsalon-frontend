@@ -19,7 +19,10 @@ const BestSeller = () => {
       <div className="text-center py-8 text-3xl">
         <Title text1={"TRANDING"} text2={"SERVICES"} />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-          Salon Expertise to Your Doorstep
+          Stay ahead of the beauty curve with our trending services—featuring
+          the most requested treatments loved by our clients. From glow-boosting
+          facials to expert waxing and spa sessions, experience salon-quality
+          care at home.
         </p>
       </div>
 
