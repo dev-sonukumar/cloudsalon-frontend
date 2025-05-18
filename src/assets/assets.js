@@ -18,6 +18,16 @@ import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 
 import main_banner_bg from "./main_banner_bg.png";
+import main_banner_bg1 from "./main_banner_bg1.png";
+import main_banner_bg2 from "./main_banner_bg2.png";
+import main_banner_bg3 from "./main_banner_bg3.png";
+import main_banner_bg4 from "./main_banner_bg4.png";
+import main_banner_bg_mb1 from "./main_banner_bg_mb1.png";
+import main_banner_bg_mb2 from "./main_banner_bg_mb2.png";
+import main_banner_bg_mb3 from "./main_banner_bg_mb3.png";
+import main_banner_bg_mb4 from "./main_banner_bg_mb4.png";
+import main_banner_bg_mb5 from "./main_banner_bg_mb5.png";
+
 import hairstyle from "././assets/service/hair1.webp";
 import makeup from "././assets/service/makeup1.webp";
 import threading from "././assets/service/threading1.webp";
@@ -38,6 +48,10 @@ export const assets = {
   white_arrow_icon,
   black_arrow_icon,
   main_banner_bg,
+  main_banner_bg1,
+  main_banner_bg2,
+  main_banner_bg3,
+  main_banner_bg4,
   main_banner_bg_sm,
   bottom_banner_image,
   bottom_banner_image_sm,
@@ -68,28 +82,43 @@ export const assets = {
   razorpay_logo,
   stripe_logo,
   cross_icon,
+  main_banner_bg_mb1,
+  main_banner_bg_mb2,
+  main_banner_bg_mb3,
+  main_banner_bg_mb4,
+  main_banner_bg_mb5,
 };
 
 export const features = [
   {
-    icon: logo,
-    title: "Fastest Delivery",
-    description: "Groceries delivered in under 30 minutes.",
+    icon: star_icon,
+    title: "Experience the Elegance of Cloud Salon",
+    description: "Your journey to beauty begins here",
   },
   {
-    icon: logo,
-    title: "Freshness Guaranteed",
-    description: "Fresh produce straight from the source.",
+    icon: star_icon,
+    title: "Where Beauty Meets Innovation",
+    description: "Modern styles, timeless confidence.",
   },
   {
-    icon: logo,
-    title: "Affordable Prices",
-    description: "Quality groceries at unbeatable prices.",
+    icon: star_icon,
+    title: "Glow with Confidence, Shine with Style",
+    description: "Personalized care from experts you trust.",
   },
   {
-    icon: logo,
-    title: "Trusted by Thousands",
-    description: "Loved by 10,000+ happy customers.",
+    icon: star_icon,
+    title: "Step Into the Cloud of Beauty & Wellness",
+    description: "Salon services elevated to perfection..",
+  },
+  {
+    icon: star_icon,
+    title: "Unleash a New You Today",
+    description: "Chic haircuts. Glowing skin. Relaxed soul.",
+  },
+  {
+    icon: star_icon,
+    title: "Because You Deserve to Look Your Best",
+    description: "Let your style speak volumes.",
   },
 ];
 

@@ -1,33 +1,122 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 
-const Hero = () => {
+const slides = [
+  {
+    id: 1,
+    image: assets.main_banner_bg1,
+    heading: "India’s Most Affordable Home Salon Home Salon in Delhi.",
+    subheading:
+      "No need to step out for Salon! Cloud Salon provides all Salon Services near you, including Waxing, facials, Manicures, pedicures, Spa from experienced beauticians, and more.",
+  },
+  {
+    id: 2,
+    image: assets.main_banner_bg2,
+    heading: "Be Your Best Version",
+    subheading: "With Cloud Salon",
+  },
+  {
+    id: 3,
+    image: assets.main_banner_bg3,
+  },
+  {
+    id: 4,
+    image: assets.main_banner_bg4,
+  },
+];
+
+const slides_mb = [
+  {
+    id: 1,
+    image: assets.main_banner_bg_mb1,
+    heading: "India’s Most Affordable Home Salon Home Salon in Delhi.",
+    subheading:
+      "No need to step out for Salon! Cloud Salon provides all Salon Services near you, including Waxing, facials, Manicures, pedicures, Spa from experienced beauticians, and more.",
+  },
+  {
+    id: 2,
+    image: assets.main_banner_bg_mb2,
+  },
+  {
+    id: 3,
+    image: assets.main_banner_bg_mb3,
+  },
+  {
+    id: 4,
+    image: assets.main_banner_bg_mb4,
+  },
+  {
+    id: 5,
+    image: assets.main_banner_bg_mb5,
+  },
+];
+
+export default function HeroSlider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const activeSlides = isMobile ? slides_mb : slides;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust threshold as needed
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [activeSlides]);
+
   return (
-    <div
-      className="flex flex-col sm:flex-row border border-gray-400
-    
-    "
-    >
-      {/* Hero Left Side */}
-      <div className="w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0">
-        <div className="text-[#414141]">
-          <div className="flex items-center gap-2">
-            <p className="w-8 md:w-11 h-[2px] bg-[#414141]"></p>
-            <p className=" font-medium text-sm md:text-base">OUR BESTSELLERS</p>
-          </div>
-          <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
-            Latest Arrivals
-          </h1>
-          <div className="flex items-center gap-2">
-            <p className="font-semibold text-sm md:text-base">SHOP NOW</p>
-            <p className="w-8 md:w-11 h-[1px] bg-[#414141]"></p>
-          </div>
+    <div className="w-full h-[600px] relative overflow-hidden">
+      {activeSlides.map((slide, index) => (
+        <div
+          key={slide.id + "-" + index}
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={slide.heading || `Slide ${index + 1}`}
+            className="w-full h-full object-cover"
+          />
+          {(slide.heading || slide.subheading) && (
+            <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-14">
+              {slide.heading && (
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-[45%] leading-tight lg:leading-15">
+                  {slide.heading}
+                </h1>
+              )}
+              {slide.subheading && (
+                <p className="text-sm md:text-md pt-4 text-center md:text-left lg:max-w-[35%]">
+                  {slide.subheading}
+                </p>
+              )}
+            </div>
+          )}
         </div>
+      ))}
+
+      {/* Dots */}
+      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {activeSlides.map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full ${
+              index === currentSlide ? "bg-white" : "bg-gray-400"
+            }`}
+            onClick={() => setCurrentSlide(index)}
+          ></button>
+        ))}
       </div>
-      {/* Hero Right Side */}
-      <img className="w-full sm:w-1/2" src={assets.main_banner_bg} alt="" />
     </div>
   );
-};
-
-export default Hero;
+}

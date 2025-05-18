@@ -1,5 +1,5 @@
 import React from "react";
-// import Hero from "../components/Hero";
+import Hero from "../components/Hero";
 import LatestCollection from "../components/LatestCollection";
 import BestSeller from "../components/BestSeller";
 import OurPolicy from "../components/OurPolicy";
@@ -11,9 +11,9 @@ import Categories from "../components/Categories";
 const Home = () => {
   return (
     <div>
-      <MainBanner />
+      <Hero />
       <Categories />
-      {/* <Hero /> */}
+      <MainBanner />
       <LatestCollection />
       <BottomBanner />
       <BestSeller />
