@@ -27,6 +27,7 @@ import main_banner_bg_mb2 from "./main_banner_bg_mb2.png";
 import main_banner_bg_mb3 from "./main_banner_bg_mb3.png";
 import main_banner_bg_mb4 from "./main_banner_bg_mb4.png";
 import main_banner_bg_mb5 from "./main_banner_bg_mb5.png";
+import main_banner_bg5 from "./main_banner_bg5.png";
 
 import hairstyle from "././assets/service/hair1.webp";
 import makeup from "././assets/service/makeup1.webp";
@@ -87,6 +88,7 @@ export const assets = {
   main_banner_bg_mb3,
   main_banner_bg_mb4,
   main_banner_bg_mb5,
+  main_banner_bg5,
 };
 
 export const features = [

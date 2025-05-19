@@ -11,17 +11,21 @@ const slides = [
   },
   {
     id: 2,
+    image: assets.main_banner_bg5,
+  },
+  {
+    id: 3,
     image: assets.main_banner_bg2,
     heading:
       "Redefine Your Beauty Routine with Professional Care, Anytime, Anywhere — Only with Cloud Salon.",
   },
   {
-    id: 3,
-    image: assets.main_banner_bg3,
-  },
-  {
     id: 4,
     image: assets.main_banner_bg4,
+  },
+  {
+    id: 5,
+    image: assets.main_banner_bg3,
   },
 ];
 
