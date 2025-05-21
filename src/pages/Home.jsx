@@ -7,6 +7,7 @@ import NewsletterBox from "../components/NewsletterBox";
 import MainBanner from "../components/MainBanner";
 import BottomBanner from "../components/BottomBanner";
 import Categories from "../components/Categories";
+import FloatingContactButtons from "../components/FloatingContactButtons";
 
 const Home = () => {
   return (
@@ -19,6 +20,8 @@ const Home = () => {
       <BestSeller />
       <OurPolicy />
       <NewsletterBox />
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons phoneNumber="919540050510" />
     </div>
   );
 };

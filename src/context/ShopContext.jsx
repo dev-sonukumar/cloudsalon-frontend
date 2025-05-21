@@ -43,10 +43,13 @@ const ShopContextProvider = (props) => {
           { itemId, size },
           { headers: { token } }
         );
+        toast.success("Cart added"); // ✅ Fix: toast here, outside of axios.post
       } catch (error) {
         console.log(error);
         toast.error(error.message);
       }
+    } else {
+      toast.success("Cart added"); // ✅ Show success toast for guest user
     }
   };
 
