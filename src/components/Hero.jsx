@@ -95,7 +95,7 @@ export default function HeroSlider() {
           {(slide.heading || slide.subheading) && (
             <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-14">
               {slide.heading && (
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-[45%] leading-tight lg:leading-15">
+                <h1 className="text-2xl md:text-4xl lg:text-4xl font-extrabold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-[45%] leading-tight lg:leading-15">
                   {slide.heading}
                 </h1>
               )}

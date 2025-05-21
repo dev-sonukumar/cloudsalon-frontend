@@ -21,7 +21,7 @@ const Home = () => {
       <OurPolicy />
       <NewsletterBox />
       {/* Floating Contact Buttons */}
-      <FloatingContactButtons phoneNumber="919540050510" />
+      <FloatingContactButtons phoneNumber="919315040549" />
     </div>
   );
 };
