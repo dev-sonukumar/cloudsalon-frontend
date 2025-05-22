@@ -22,6 +22,7 @@ import Facial from "./pages/categoriesPages/Facial";
 import Waxing from "./pages/categoriesPages/Waxing";
 import ManicurePedicure from "./pages/categoriesPages/ManicurePedicure";
 import Combo from "./pages/categoriesPages/Combo";
+import Bleach from "./pages/categoriesPages/Bleach";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/threading" element={<Threading />} />
         <Route path="/facial" element={<Facial />} />
         <Route path="/waxing" element={<Waxing />} />
+        <Route path="/bleach" element={<Bleach />} />
         <Route path="/manicure-pedicure" element={<ManicurePedicure />} />
         <Route path="/combo" element={<Combo />} />
       </Routes>

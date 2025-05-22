@@ -36,6 +36,7 @@ import facial from "././assets/service/facial1.webp";
 import waxing from "././assets/service/waxing1.webp";
 import manicure from "././assets/service/manicure1.webp";
 import combo from "././assets/service/combo1.webp";
+import bleach from "././assets/service/bleach.webp";
 import black_arrow_icon from "./black_arrow_icon.svg";
 import white_arrow_icon from "./white_arrow_icon.svg";
 
@@ -65,6 +66,7 @@ export const assets = {
   waxing,
   manicure,
   combo,
+  bleach,
   logo,
   hero_img,
   cart_icon,
@@ -112,16 +114,16 @@ export const features = [
     title: "Step Into the Cloud of Beauty & Wellness",
     description: "Salon services elevated to perfection..",
   },
-  {
-    icon: star_icon,
-    title: "Unleash a New You Today",
-    description: "Chic haircuts. Glowing skin. Relaxed soul.",
-  },
-  {
-    icon: star_icon,
-    title: "Because You Deserve to Look Your Best",
-    description: "Let your style speak volumes.",
-  },
+  // {
+  //   icon: star_icon,
+  //   title: "Unleash a New You Today",
+  //   description: "Chic haircuts. Glowing skin. Relaxed soul.",
+  // },
+  // {
+  //   icon: star_icon,
+  //   title: "Because You Deserve to Look Your Best",
+  //   description: "Let your style speak volumes.",
+  // },
 ];
 
 export const categories = [
@@ -160,6 +162,12 @@ export const categories = [
     path: "manicure-pedicure",
     image: manicure,
     bgColor: "#E0F6FE",
+  },
+  {
+    text: "Bleach",
+    path: "bleach",
+    image: bleach,
+    bgColor: "#F1E3F9",
   },
   {
     text: "Combo",

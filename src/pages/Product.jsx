@@ -92,9 +92,14 @@ const Product = () => {
 
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
-            <p>100% Original product.</p>
-            <p>Cash on delivery is available on this product.</p>
-            <p>Easy return and exchange policy within 7 days.</p>
+            <p>100% Authentic beauty services from verified professionals.</p>
+            <p>
+              Flexible payment options – Pay online or after your appointment.
+            </p>
+            <p>
+              Top-rated beauty experts at your doorstep or trusted partner
+              salons.
+            </p>
           </div>
         </div>
       </div>
@@ -107,19 +112,18 @@ const Product = () => {
         </div>
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
           <p>
-            An e-commerce website is an online platform that facilitates the
-            buying and selling of products or services over the internet. It
-            serves as a virtual marketplace where businesses and individuals can
-            showcase their products, interact with customers, and conduct
-            transactions without the need for a physical presence. E-commerce
-            websites have gained immense popularity due to their convenience,
-            accessibility, and the global reach they offer.
+            CloudSalon is a modern e-commerce platform that connects customers
+            with professional salon and beauty services delivered right to their
+            doorstep. Whether it's hair styling, skincare, makeup, or spa
+            treatments—our platform brings the entire salon experience to the
+            comfort of your home.
           </p>
           <p>
-            E-commerce websites typically display products or services along
-            with detailed descriptions, images, prices, and any available
-            variations (e.g., sizes, colors). Each product usually has its own
-            dedicated page with relevant information.
+            Each service is listed with clear descriptions, pricing, estimated
+            duration, and images to help you choose the right treatment.
+            Customers can easily browse, schedule appointments, and make secure
+            payments online, making beauty care convenient, personalized, and
+            accessible anytime.
           </p>
         </div>
       </div>

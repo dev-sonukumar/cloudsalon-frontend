@@ -79,28 +79,28 @@ export default function HeroSlider() {
   }, [activeSlides]);
 
   return (
-    <div className="w-full h-[600px] relative overflow-hidden">
+    <div className="w-full h-[700px] xl:h-[600px]  relative overflow-hidden">
       {activeSlides.map((slide, index) => (
         <div
           key={slide.id + "-" + index}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+          className={`absolute top-0 left-0 w-full transition-opacity duration-1000 ease-in-out ${
             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
           <img
             src={slide.image}
             alt={slide.heading || `Slide ${index + 1}`}
-            className="w-full h-full object-cover"
+            className="w-full"
           />
           {(slide.heading || slide.subheading) && (
             <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-14">
               {slide.heading && (
-                <h1 className="text-2xl md:text-4xl lg:text-4xl font-extrabold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-[45%] leading-tight lg:leading-15">
+                <h1 className="text-2xl md:text-2xl lg:text-3xl  xl:text-4xl  font-extrabold text-center md:text-left max-w-72 md:max-w-80 lg:max-w-[48%] leading-tight lg:leading-15">
                   {slide.heading}
                 </h1>
               )}
               {slide.subheading && (
-                <p className="text-sm md:text-md pt-4 text-center md:text-left lg:max-w-[35%]">
+                <p className="text-sm md:text-md lg:text-lg pt-4 text-center md:text-left lg:max-w-[35%]">
                   {slide.subheading}
                 </p>
               )}

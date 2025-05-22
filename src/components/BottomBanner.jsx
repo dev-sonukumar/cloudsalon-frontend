@@ -36,10 +36,10 @@ const BottomBanner = () => {
               <img
                 src={feature.icon}
                 alt={feature.title}
-                className="md:w-6 w-6"
+                className="md:w-6 w-6 border  p-1 rounded"
               />
               <div>
-                <h3 className="text-lg md:text-xl font-semibold">
+                <h3 className="text-lg md:text-md font-semibold">
                   {feature.title}
                 </h3>
                 <p className="text-gray-500/70 text-xs md:text-sm">
