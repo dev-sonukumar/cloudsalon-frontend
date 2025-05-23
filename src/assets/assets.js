@@ -164,7 +164,7 @@ export const categories = [
     bgColor: "#E0F6FE",
   },
   {
-    text: "Bleach",
+    text: "Bleach | D-tan | Clean-up",
     path: "bleach",
     image: bleach,
     bgColor: "#F1E3F9",

@@ -5,25 +5,28 @@ import ProductItem from "../../components/ProductItem";
 
 const Bleach = () => {
   const { products } = useContext(ShopContext);
-  const [bleach, setBleachProducts] = useState([]);
+  const [bleach, setBleach] = useState([]);
+  const [dtan, setDTan] = useState([]);
+  const [cleanup, setCleanUp] = useState([]);
 
   useEffect(() => {
-    const filtered = products.filter((item) => item.category === "bleach");
-    setBleachProducts(filtered);
+    setBleach(products.filter((item) => item.category === "bleach"));
+    setDTan(products.filter((item) => item.category === "D-tan"));
+    setCleanUp(products.filter((item) => item.category === "Clean-up"));
   }, [products]);
 
-  return (
-    <div className="py-10">
-      <Title text1="BLEACH" text2="SERVICES" />
-      {bleach.length === 0 ? (
+  const renderCategory = (title, items) => (
+    <div className="mb-12">
+      <Title text1={title.toUpperCase()} text2="SERVICES" />
+      {items.length === 0 ? (
         <p className="text-center text-gray-500 mt-6">
-          No waxing services found.
+          No {title.toLowerCase()} services found.
         </p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 mt-6">
-          {bleach.map((item, index) => (
+          {items.map((item) => (
             <ProductItem
-              key={index}
+              key={item._id}
               id={item._id}
               name={item.name}
               price={item.price}
@@ -32,6 +35,14 @@ const Bleach = () => {
           ))}
         </div>
       )}
+    </div>
+  );
+
+  return (
+    <div className="py-10">
+      {renderCategory("Bleach", bleach)}
+      {renderCategory("D-tan", dtan)}
+      {renderCategory("Clean-up", cleanup)}
     </div>
   );
 };
