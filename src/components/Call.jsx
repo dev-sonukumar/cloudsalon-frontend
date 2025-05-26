@@ -5,7 +5,7 @@ const Call = () => {
   return (
     <section className="bg-gray-100 py-10 px-4 md:px-8 text-center">
       <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
-        For more details, you can contact us
+        For fast booking and consulting you can contact us directly
       </h2>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
