@@ -2,13 +2,36 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./src/assets/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Cloud Salon</title>
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/webp" href="/assets/logo.webp" />
+
+    <!-- ✅ Preload the most important image (banner or logo) -->
+    <link rel="preload" as="image" href="/assets/mobile_banner1.webp" />
+    <link rel="preload" as="image" href="/assets/logo.webp" />
+
+    <!-- ✅ Prefetch the next likely images (helps smoother transitions) -->
+    <link rel="prefetch" as="image" href="/assets/mobile_banner2.webp" />
+    <link rel="prefetch" as="image" href="/assets/main_banner_bg1.webp" />
+    <link rel="prefetch" as="image" href="/assets/main_banner_bg2.webp" />
+
+    <!-- ✅ Performance tip: Set background color so white doesn't flash while images load -->
+    <style>
+      body {
+        background-color: #fffaf6; /* light skin tone or salon-friendly soft tone */
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- ✅ Vite/React main script -->
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- ✅ Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
   </body>
 </html>
