@@ -8,6 +8,7 @@ import NewsletterBox from "../components/NewsletterBox";
 import BottomBanner from "../components/BottomBanner";
 import Categories from "../components/Categories";
 import FloatingContactButtons from "../components/FloatingContactButtons";
+import Call from "../components/Call";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Categories />
       {/* <MainBanner /> */}
       {/* <LatestCollection /> */}
+      <Call />
       <BottomBanner />
       <BestSeller />
       {/* <OurPolicy /> */}
