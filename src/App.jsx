@@ -23,6 +23,11 @@ import Waxing from "./pages/categoriesPages/Waxing";
 import ManicurePedicure from "./pages/categoriesPages/ManicurePedicure";
 import Combo from "./pages/categoriesPages/Combo";
 import Bleach from "./pages/categoriesPages/Bleach";
+import Disclaimer from "./pages/EssentialPages/Disclaimer";
+import PrivacyPolicy from "./pages/EssentialPages/PrivacyPolicy";
+import RefundPolicy from "./pages/EssentialPages/RefundPolicy";
+import ShippingPolicy from "./pages/EssentialPages/ShippingPolicy";
+import TermsAndConditions from "./pages/EssentialPages/TermsAndConditions";
 
 const App = () => {
   return (
@@ -49,6 +54,12 @@ const App = () => {
         <Route path="/bleach" element={<Bleach />} />
         <Route path="/manicure-pedicure" element={<ManicurePedicure />} />
         <Route path="/combo" element={<Combo />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/refundPolicy" element={<RefundPolicy />} />
+        <Route path="/refundPolicy" element={<RefundPolicy />} />
+        <Route path="/shippingPolicy" element={<ShippingPolicy />} />
+        <Route path="/termsAndCondition" element={<TermsAndConditions />} />
       </Routes>
       <Footer />
     </div>
