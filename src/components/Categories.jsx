@@ -6,7 +6,7 @@ const Categories = () => {
   const { navigate } = useShopContext();
 
   return (
-    <div className="mt-5 mb-16">
+    <div className="mt-16 mb-16">
       <div className="text-center py-8 text-3xl">
         <Title text1={"OUR"} text2={"CATEGORIES"} />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
