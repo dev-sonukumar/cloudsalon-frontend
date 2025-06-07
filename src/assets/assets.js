@@ -17,17 +17,11 @@ import razorpay_logo from "./razorpay_logo.png";
 import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 
-import main_banner_bg from "./main_banner_bg.png";
-import main_banner_bg1 from "./main_banner_bg1.png";
-import main_banner_bg2 from "./main_banner_bg2.png";
-import main_banner_bg3 from "./main_banner_bg3.png";
-import main_banner_bg4 from "./main_banner_bg4.png";
-import main_banner_bg_mb1 from "./main_banner_bg_mb1.png";
-import main_banner_bg_mb2 from "./main_banner_bg_mb2.png";
-import main_banner_bg_mb3 from "./main_banner_bg_mb3.png";
-import main_banner_bg_mb4 from "./main_banner_bg_mb4.png";
-import main_banner_bg_mb5 from "./main_banner_bg_mb5.png";
-import main_banner_bg5 from "./main_banner_bg5.png";
+import main_banner_bg1 from "./main_banner_bg1.jpg";
+import main_banner_bg2 from "./main_banner_bg2.jpg";
+import main_banner_bg3 from "./main_banner_bg3.jpg";
+import main_banner_bg4 from "./main_banner_bg4.jpg";
+import main_banner_bg5 from "./main_banner_bg5.jpg";
 
 import hairstyle from "././assets/service/hair1.webp";
 import makeup from "././assets/service/makeup1.webp";
@@ -49,11 +43,12 @@ import bottom_banner_video_sm1 from "./bottom_banner_video_sm.mp4";
 export const assets = {
   white_arrow_icon,
   black_arrow_icon,
-  main_banner_bg,
+
   main_banner_bg1,
   main_banner_bg2,
   main_banner_bg3,
   main_banner_bg4,
+  main_banner_bg5,
   main_banner_bg_sm,
   bottom_banner_image,
   bottom_banner_image_sm,
@@ -85,12 +80,6 @@ export const assets = {
   razorpay_logo,
   stripe_logo,
   cross_icon,
-  main_banner_bg_mb1,
-  main_banner_bg_mb2,
-  main_banner_bg_mb3,
-  main_banner_bg_mb4,
-  main_banner_bg_mb5,
-  main_banner_bg5,
 };
 
 export const features = [
