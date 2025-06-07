@@ -23,6 +23,12 @@ import main_banner_bg3 from "./main_banner_bg3.jpg";
 import main_banner_bg4 from "./main_banner_bg4.jpg";
 import main_banner_bg5 from "./main_banner_bg5.jpg";
 
+import main_banner_pc_bg1 from "./main_banner_pc_bg1.jpg";
+import main_banner_pc_bg2 from "./main_banner_pc_bg2.jpg";
+import main_banner_pc_bg3 from "./main_banner_pc_bg3.jpg";
+import main_banner_pc_bg4 from "./main_banner_pc_bg4.jpg";
+import main_banner_pc_bg5 from "./main_banner_pc_bg5.jpg";
+
 import hairstyle from "././assets/service/hair1.webp";
 import makeup from "././assets/service/makeup1.webp";
 import threading from "././assets/service/threading1.webp";
@@ -41,6 +47,11 @@ import bottom_banner_video_sm from "./bottom_banner_video_sm.mp4";
 import bottom_banner_video_sm1 from "./bottom_banner_video_sm.mp4";
 
 export const assets = {
+  main_banner_pc_bg1,
+  main_banner_pc_bg2,
+  main_banner_pc_bg3,
+  main_banner_pc_bg4,
+  main_banner_pc_bg5,
   white_arrow_icon,
   black_arrow_icon,
 
